@@ -15,7 +15,40 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".GameSelectActivity"
+            android:label="@string/title_activity_game_select"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="landscape" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sg.com.yahoo.ryanlouck.hang10.MainActivity" />
+        </activity>
+        <activity
+            android:name=".HelpActivity"
+            android:label="@string/title_activity_help"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="landscape" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sg.com.yahoo.ryanlouck.hang10.MainActivity" />
+        </activity>
+        <activity
+            android:name=".OptionsActivity"
+            android:label="@string/title_activity_options"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="landscape" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sg.com.yahoo.ryanlouck.hang10.MainActivity" />
         </activity>
     </application>
 

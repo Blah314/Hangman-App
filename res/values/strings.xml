@@ -5,5 +5,71 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
-
+    <string name="playButton">Play!</string>
+    <string name="continueButton">Continue\nGame</string>
+    <string name="helpButton">Help</string>
+    <string name="optionsButton">Options</string>
+    <string name="title_activity_game_select">GameSelectActivity</string>
+    <string name="title_activity_help">HelpActivity</string>
+    <string name="title_activity_options">OptionsActivity</string>
+    <string name="helpTitle">HELP</string>
+    <string name="backButton">BACK</string>
+    <string name="prevButton">Prev.</string>
+    <string name="nextButton">Next</string>
+    <string name="placeholder">PH</string>
+    <string name="firstPage">This is the first page.</string>
+    <string name="lastPage">This is the last page.</string>
+    <string-array name="instructions">
+        <item>Welcome to Hang 10!\n\n
+            This is unlike any other Hangman game you have ever played!\n\n
+            If you have played Hangman before, this will be familiar and you should should have no problems figuring out the game. But even if you haven\'t, these help pages should tell you everything you need to know.</item>
+        <item>The Basics\n\n
+            Each game of Hang 10 consists of - well - 10 rounds of Hangman puzzles - each of increasing difficulty.\n\n
+            The concept is simple - pick a category and you\'ll be given a phrase to guess. Guess letters by tapping on them and if they are in the phrase they are revealed. If not, you lose a life! :(\n\n
+            You win each round by completely revealing the phrase. Win 10 rounds without losing all your lives and you win! </item>
+        <item>Power-Ups\n\n
+            Hang 10 can sometimes be a VERY difficult game. To help you along, there are powerups at your disposal. Each can only be used once per game and none can be used on Round 10.\n\n
+            The Life Saver: Depending on how many of the letter you guess next are in the phrase, you will gain lives corressponding to that amount.\n\n
+            The Letter Reveal: Reveals a random letter in the phrase.\n\n
+            The Letter Eliminator: Eliminates five random letters not in the phrase from those that have not been guessed.\n\n
+            The Free Guess: If you guess wrongly in your next turn, you won\'t lose a life!</item>
+		<item>Game Modes\n\n
+		    Completing the game the first time round grants you access to new game modes to test yourself against.\n\n
+		    Some game modes restrict your powerups, some have quirky new features and others are just plain difficult.\n\n
+		    Can you conquer them all?</item>
+    </string-array>
+    <string name="modeSelect">Select a game mode:</string>
+    <string name="cEasy">Classic\nEasy</string>
+    <string name="cMedium">Classic\nMedium</string>
+    <string name="cHard">Classic\nHard</string>
+    <string name="freeLunch">Free\nLunch</string>
+    <string name="noFrills">No\nFrills</string>
+    <string name="economy">Economy</string>
+    <string name="fortune">Fortune</string>
+    <string name="quadLife">Quad\nLife</string>
+    <string name="endurance">Endurance</string>
+    
+    <string-array name="modeNames">
+        <item>Classic Easy</item>
+        <item>Classic Medium</item>
+        <item>Classic Hard</item>
+        <item>Free Lunch</item>
+        <item>No Frills</item>
+        <item>Economy</item>
+        <item>Fortune</item>
+        <item>Quad-Life</item>
+        <item>Endurance</item>
+    </string-array>
+    
+    <string-array name="modeDesc">
+        <item>The most basic game mode. 50 lives to get through 10 puzzles.</item>
+        <item>Hard. 40 lives to get through 10 puzzles.</item>
+        <item>Incredibly Hard. Just 30 lives to get through 10 puzzles.</item>
+        <item>You get one Free Guess per round, but no other powerups. 45 lives.</item>
+        <item>How Hang 10 was meant to be played. No powerups. 50 lives.</item>
+        <item>Earn money by guessing letters - the rarer the better. Buy powerups with your money. 40 lives.</item>
+        <item>Just like the famous gameshow - you cannot guess vowels. 40 lives.</item>
+        <item>Hardcore. You get 4 lives a puzzle. No more, no less.</item>
+        <item>The ultimate challenge. Infinite hard puzzles - how many can you solve with 35 lives?</item>
+    </string-array>
 </resources>

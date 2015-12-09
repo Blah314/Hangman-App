@@ -9,46 +9,35 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
-public class MainActivity extends Activity {
+public class GameSelectActivity extends Activity {
 	
-	private Button playButton, continueButton, helpButton, optionsButton;
+	private Button backButton, cEasy, cMedium, cHard, freeLunch, noFrills, economy, fortune, quadLife, endurance;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 	    getActionBar().hide();
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_game_select);
 		
-		playButton = (Button) findViewById(R.id.playButton);
-		continueButton = (Button) findViewById(R.id.continueButton);
-		helpButton = (Button) findViewById(R.id.helpButton);
-		optionsButton = (Button) findViewById(R.id.optionsButton);
+		cEasy = (Button) findViewById(R.id.cEasy);
+		cMedium = (Button) findViewById(R.id.cMedium);
+		cHard = (Button) findViewById(R.id.cHard);
+		freeLunch = (Button) findViewById(R.id.freeLunch);
+		noFrills = (Button) findViewById(R.id.noFrills);
+		economy = (Button) findViewById(R.id.economy);
+		fortune = (Button) findViewById(R.id.fortune);
+		quadLife = (Button) findViewById(R.id.quadLife);
+		endurance = (Button) findViewById(R.id.endurance);
 		
-		playButton.setOnClickListener(new View.OnClickListener() {
+		backButton = (Button) findViewById(R.id.backButton);
+		
+		backButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				Intent playLaunch = new Intent(getApplicationContext(), GameSelectActivity.class);
-				startActivity(playLaunch);
-			}
-		});
-		
-		helpButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent helpLaunch = new Intent(getApplicationContext(), HelpActivity.class);
-				startActivity(helpLaunch);
-			}
-		});
-		
-		optionsButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent optionsLaunch = new Intent(getApplicationContext(), OptionsActivity.class);
-				startActivity(optionsLaunch);
+				Intent mainLaunch = new Intent(getApplicationContext(), MainActivity.class);
+				startActivity(mainLaunch);
 			}
 		});
 	}
@@ -61,7 +50,7 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.game_select, menu);
 		return true;
 	}
 

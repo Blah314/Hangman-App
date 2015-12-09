@@ -9,46 +9,25 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
-public class MainActivity extends Activity {
+public class OptionsActivity extends Activity {
 	
-	private Button playButton, continueButton, helpButton, optionsButton;
+	private Button backButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 	    getActionBar().hide();
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_options);
 		
-		playButton = (Button) findViewById(R.id.playButton);
-		continueButton = (Button) findViewById(R.id.continueButton);
-		helpButton = (Button) findViewById(R.id.helpButton);
-		optionsButton = (Button) findViewById(R.id.optionsButton);
+		backButton = (Button) findViewById(R.id.backButton);
 		
-		playButton.setOnClickListener(new View.OnClickListener() {
+		backButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				Intent playLaunch = new Intent(getApplicationContext(), GameSelectActivity.class);
-				startActivity(playLaunch);
-			}
-		});
-		
-		helpButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent helpLaunch = new Intent(getApplicationContext(), HelpActivity.class);
-				startActivity(helpLaunch);
-			}
-		});
-		
-		optionsButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent optionsLaunch = new Intent(getApplicationContext(), OptionsActivity.class);
-				startActivity(optionsLaunch);
+				Intent mainLaunch = new Intent(getApplicationContext(), MainActivity.class);
+				startActivity(mainLaunch);
 			}
 		});
 	}
@@ -57,11 +36,11 @@ public class MainActivity extends Activity {
 		super.onStop();
 		this.finish();
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.options, menu);
 		return true;
 	}
 
