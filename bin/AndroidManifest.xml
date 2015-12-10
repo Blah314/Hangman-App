@@ -50,6 +50,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="sg.com.yahoo.ryanlouck.hang10.MainActivity" />
         </activity>
+        <activity
+            android:name=".CategoryActivity"
+            android:label="@string/title_activity_category"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="landscape" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sg.com.yahoo.ryanlouck.hang10.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

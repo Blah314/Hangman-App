@@ -19,6 +19,7 @@
     <string name="placeholder">PH</string>
     <string name="firstPage">This is the first page.</string>
     <string name="lastPage">This is the last page.</string>
+
     <string-array name="instructions">
         <item>Welcome to Hang 10!\n\n
             This is unlike any other Hangman game you have ever played!\n\n
@@ -33,11 +34,12 @@
             The Letter Reveal: Reveals a random letter in the phrase.\n\n
             The Letter Eliminator: Eliminates five random letters not in the phrase from those that have not been guessed.\n\n
             The Free Guess: If you guess wrongly in your next turn, you won\'t lose a life!</item>
-		<item>Game Modes\n\n
+        <item>Game Modes\n\n
 		    Completing the game the first time round grants you access to new game modes to test yourself against.\n\n
 		    Some game modes restrict your powerups, some have quirky new features and others are just plain difficult.\n\n
 		    Can you conquer them all?</item>
     </string-array>
+
     <string name="modeSelect">Select a game mode:</string>
     <string name="cEasy">Classic\nEasy</string>
     <string name="cMedium">Classic\nMedium</string>
@@ -48,7 +50,7 @@
     <string name="fortune">Fortune</string>
     <string name="quadLife">Quad\nLife</string>
     <string name="endurance">Endurance</string>
-    
+
     <string-array name="modeNames">
         <item>Classic Easy</item>
         <item>Classic Medium</item>
@@ -60,7 +62,6 @@
         <item>Quad-Life</item>
         <item>Endurance</item>
     </string-array>
-    
     <string-array name="modeDesc">
         <item>The most basic game mode. 50 lives to get through 10 puzzles.</item>
         <item>Hard. 40 lives to get through 10 puzzles.</item>
@@ -72,4 +73,20 @@
         <item>Hardcore. You get 4 lives a puzzle. No more, no less.</item>
         <item>The ultimate challenge. Infinite hard puzzles - how many can you solve with 35 lives?</item>
     </string-array>
+    <string-array name="unlockReqs">
+        <item>No requirements.</item>
+        <item>Complete Classic Easy to unlock.</item>
+        <item>Complete Classic Medium to unlock.</item>
+        <item>Complete Classic Easy to unlock.</item>
+        <item>Complete Free Lunch to unlock.</item>
+        <item>Complete Free Lunch and Classic Medium to unlock.</item>
+        <item>Complete No Frills and Economy to unlock.</item>
+        <item>Complete Economy and Classic Hard to unlock.</item>
+        <item>Complete Fortune and Quad-Life to unlock.</item>
+    </string-array>
+
+    <string name="modeLocked">You need to unlock this mode first.</string>
+    <string name="title_activity_category">CategoryActivity</string>
+    <string name="categoryChoice">Choose a Category...</string>
+
 </resources>
