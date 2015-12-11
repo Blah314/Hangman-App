@@ -1,10 +1,11 @@
 package sg.com.yahoo.ryanlouck.hang10;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Random;
 
-public class Category {
+public class Category implements Serializable {
 	
 	private String name;
 	private Hashtable<Integer, ArrayList<String>> phrases;
@@ -18,12 +19,11 @@ public class Category {
 		r = new Random();
 	}
 	
-	public Phrase newPharse(int difficulty){
+	public String newPharse(int difficulty){
 		ArrayList<String> diffPhrases = phrases.get(difficulty);
 		int next = r.nextInt(diffPhrases.size());
-		Phrase p = new Phrase(diffPhrases.get(next));
 		used = true;
-		return p;
+		return diffPhrases.get(next);
 	}
 	
 	public boolean isUsed(){

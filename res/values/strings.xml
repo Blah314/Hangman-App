@@ -88,5 +88,9 @@
     <string name="modeLocked">You need to unlock this mode first.</string>
     <string name="title_activity_category">CategoryActivity</string>
     <string name="categoryChoice">Choose a Category...</string>
+    <string name="categoryChosen">You have already chosen this category.</string>
+    <string name="title_activity_game">GameActivity</string>
+    <string name="letterChosen">You have already chosen this letter.</string>
+    <string name="yay">YAY! Puzzle Solved!</string>
 
 </resources>
