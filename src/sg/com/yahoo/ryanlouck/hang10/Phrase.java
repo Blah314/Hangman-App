@@ -40,8 +40,14 @@ public class Phrase {
 		return formattedState.toString();
 	}
 	
-	public char[] correctAnswer(){
-		return answer;
+	public String correctAnswer(){
+		StringBuffer formattedAnswer = new StringBuffer();
+		for(char c : answer){
+			formattedAnswer.append(c);
+			formattedAnswer.append(" ");
+		}
+		formattedAnswer.deleteCharAt(formattedAnswer.length() - 1);
+		return formattedAnswer.toString();
 	}
 	
 	public boolean[] getGuessed(){

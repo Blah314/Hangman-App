@@ -70,7 +70,7 @@
         <item>How Hang 10 was meant to be played. No powerups. 50 lives.</item>
         <item>Earn money by guessing letters - the rarer the better. Buy powerups with your money. 40 lives.</item>
         <item>Just like the famous gameshow - you cannot guess vowels. 40 lives.</item>
-        <item>Hardcore. You get 4 lives a puzzle. No more, no less.</item>
+        <item>Hardcore. You get 4 lives a puzzle. No more, no less. No powerups either.</item>
         <item>The ultimate challenge. Infinite hard puzzles - how many can you solve with 35 lives?</item>
     </string-array>
     <string-array name="unlockReqs">
@@ -84,6 +84,17 @@
         <item>Complete Economy and Classic Hard to unlock.</item>
         <item>Complete Fortune and Quad-Life to unlock.</item>
     </string-array>
+    <string-array name="beatComments">
+        <item>That was almost too easy - right?</item>
+        <item>Hopefully that wasn\'t too hard.</item>
+        <item>Nice work! But there are harder modes to come...</item>
+        <item>Meh. Arguably Free Lunch is the easiest mode.</item>
+        <item>Who needs power-ups?</item>
+        <item>How much money did you not use?</item>
+        <item>Too bad to don\'t win real money...</item>
+        <item>I have no words. That was very, very impressive.</item>
+        <item>You can\'t beat endurance mode. This is a bug.</item>
+    </string-array>
 
     <string name="modeLocked">You need to unlock this mode first.</string>
     <string name="title_activity_category">CategoryActivity</string>
@@ -91,6 +102,9 @@
     <string name="categoryChosen">You have already chosen this category.</string>
     <string name="title_activity_game">GameActivity</string>
     <string name="letterChosen">You have already chosen this letter.</string>
-    <string name="yay">YAY! Puzzle Solved!</string>
+    <string name="gameOver">GAME OVER! The correct answer was:</string>
+    <string name="nextRound">Next></string>
+    <string name="gameWon">YOU WIN!</string>
+    <string name="alreadyBeaten">You have already beat this mode - why not try something more challenging?</string>
 
 </resources>

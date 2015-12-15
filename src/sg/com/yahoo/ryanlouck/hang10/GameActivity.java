@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ public class GameActivity extends Activity {
 			'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 	final PorterDuffColorFilter YELLOW = new PorterDuffColorFilter(Color.YELLOW, PorterDuff.Mode.OVERLAY);
 	final PorterDuffColorFilter RED = new PorterDuffColorFilter(Color.RED, PorterDuff.Mode.OVERLAY);
+	final PorterDuffColorFilter GREEN = new PorterDuffColorFilter(Color.GREEN, PorterDuff.Mode.OVERLAY);
 	
 	private Phrase p;
 	private int gameMode, roundNo, lives;
@@ -29,7 +32,8 @@ public class GameActivity extends Activity {
 	private Category currCat;
 	private TextView round, livesLeft, title, display;
 	private Button[] letterButtons;
-	private Button backButton;
+	private Button backButton, nextRoundButton;
+	private ImageButton freeGuessButton, letterElimButton, letterRevealButton, lifeSaverButton;
 	private View.OnClickListener letterChooser;
 
 	@Override
@@ -102,6 +106,11 @@ public class GameActivity extends Activity {
 			b.getBackground().setColorFilter(YELLOW);
 		}
 		
+		freeGuessButton = (ImageButton) findViewById(R.id.freeGuess);
+		letterElimButton = (ImageButton) findViewById(R.id.letterElim);
+		letterRevealButton = (ImageButton) findViewById(R.id.letterReveal);
+		lifeSaverButton = (ImageButton) findViewById(R.id.lifeSaver);
+		
 		backButton = (Button) findViewById(R.id.backButton);
 		
 		backButton.setOnClickListener(new View.OnClickListener() {
@@ -112,17 +121,98 @@ public class GameActivity extends Activity {
 				startActivity(mainLaunch);
 			}
 		});
+		
+		nextRoundButton = (Button) findViewById(R.id.nextRoundButton);
+		nextRoundButton.setVisibility(View.INVISIBLE);
 	}
 	
 	public void updateFields(){
 		display.setText(p.currentState());
 		livesLeft.setText("Lives Left: " + Integer.toString(lives));
+		
+		if(lives == 0){
+			title.setText(R.string.gameOver);
+			display.setText(p.correctAnswer());
+			livesLeft.setText("Lives Left: X.X");
+			for(Button b : letterButtons){
+				b.setOnClickListener(null);
+			}
+		}
 		if(p.isSolved()){
-			CharSequence text = getResources().getString(R.string.yay);
-			int duration = Toast.LENGTH_SHORT;
+			round.setText("Round " + Integer.toString(roundNo) + " complete!");
 			
-			Toast t = Toast.makeText(getApplicationContext(), text, duration);
-			t.show();
+			for(Button b : letterButtons){
+				b.setOnClickListener(null);
+			}
+			
+			if(roundNo == 10){
+				SharedPreferences gameData = getSharedPreferences("modesCompleted", 0);
+				SharedPreferences.Editor editor = gameData.edit();
+				boolean beatBefore;
+				
+				switch(gameMode){
+				case 0:
+					beatBefore = gameData.getBoolean("cEasy", false);
+					editor.putBoolean("cEasy", true);
+					break;
+				case 1:
+					beatBefore = gameData.getBoolean("cMedium", false);
+					editor.putBoolean("cMedium", true);
+					break;
+				case 2:
+					beatBefore = gameData.getBoolean("cHard", false);
+					editor.putBoolean("cHard", true);
+					break;
+				case 3:
+					beatBefore = gameData.getBoolean("freeLunch", false);
+					editor.putBoolean("freeLunch", true);
+					break;
+				case 4:
+					beatBefore = gameData.getBoolean("noFrills", false);
+					editor.putBoolean("noFrills", true);
+					break;
+				case 5:
+					beatBefore = gameData.getBoolean("economy", false);
+					editor.putBoolean("economy", true);
+					break;
+				case 6:
+					beatBefore = gameData.getBoolean("fortune", false);
+					editor.putBoolean("fortune", true);
+					break;
+				case 7:
+					beatBefore = gameData.getBoolean("quadLife", false);
+					editor.putBoolean("quadLife", true);
+					break;
+				default:
+					beatBefore = false;
+				}
+				String[] beatComments = getResources().getStringArray(R.array.beatComments);
+				String[] modes = getResources().getStringArray(R.array.modeNames);
+				
+				EndGameDialog edg = new EndGameDialog(modes[gameMode], beatComments[gameMode], beatBefore);
+				edg.show(getFragmentManager(), "win");
+				
+				editor.commit();
+			}
+			
+			else{
+				display.setText(p.currentState() + "\nPress Next to continue.");
+				display.setGravity(17);
+				
+				nextRoundButton.setVisibility(View.VISIBLE);
+				nextRoundButton.setOnClickListener(new View.OnClickListener() {
+				
+					@Override
+					public void onClick(View v) {
+						Intent nextRound = new Intent(getApplicationContext(), CategoryActivity.class);
+						nextRound.putExtra("mode", gameMode);
+						nextRound.putExtra("round", roundNo + 1);
+						nextRound.putExtra("livesLeft", lives);
+						nextRound.putExtra("categories", categories);
+						startActivity(nextRound);
+					}
+				});
+			}
 		}
 	}
 	

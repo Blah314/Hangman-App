@@ -33,7 +33,7 @@ public class NewGameDialog extends DialogFragment {
         builder.setTitle(modeTitle);
         
         if(unlock1 && unlock2){
-        	body.setText(modeDesc);
+        	body.setText("\n" + modeDesc);
         	builder.setPositiveButton(R.string.playButton, new DialogInterface.OnClickListener() {
 				
 				@Override
