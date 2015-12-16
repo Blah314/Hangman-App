@@ -30,6 +30,7 @@ public class CategoryActivity extends Activity {
 	private Button backButton;
 	private Button[] categoryButtons;
 	private int gameMode, roundNo, lives;
+	private boolean fgUsed, leUsed, lrUsed, lsUsed;
 	private ArrayList<Category> categories;
 	private View.OnClickListener gameStart;
 
@@ -44,6 +45,10 @@ public class CategoryActivity extends Activity {
 		gameMode = gameDetails.getInt("mode", 0);
 		roundNo = gameDetails.getInt("round", 1);
 		lives = gameDetails.getInt("livesLeft", -1);
+		fgUsed = gameDetails.getBoolean("fg", false);
+		leUsed = gameDetails.getBoolean("le", false);
+		lrUsed = gameDetails.getBoolean("lr", false);
+		lsUsed = gameDetails.getBoolean("ls", false);
 		categories = (ArrayList<Category>) gameDetails.getSerializable("categories");
 		
 		categoryButtons = new Button[]{(Button) findViewById(R.id.button1), (Button) findViewById(R.id.button2),
@@ -167,6 +172,10 @@ public class CategoryActivity extends Activity {
 							gameLaunch.putExtra("categories", categories);
 							gameLaunch.putExtra("chosenCat", i);
 							gameLaunch.putExtra("next", chosen);
+							gameLaunch.putExtra("fg", fgUsed);
+							gameLaunch.putExtra("le", leUsed);
+							gameLaunch.putExtra("lr", lrUsed);
+							gameLaunch.putExtra("ls", lsUsed);
 							startActivity(gameLaunch);
 						}
 					}

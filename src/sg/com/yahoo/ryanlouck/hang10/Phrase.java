@@ -1,25 +1,37 @@
 package sg.com.yahoo.ryanlouck.hang10;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Phrase {
 	
 	final char[] LETTERS = new char[]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
 			'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-	
 	private char[] answer;
 	private StringBuffer state;
-	private boolean[] guessed;
+	private boolean[] guessed, inside, outside;
 	private int guessAmt;
 	
 	public Phrase(String content){
 		answer = content.toCharArray();
 		guessAmt = 0;
+		inside = new boolean[26];
+		outside = new boolean[26];
+		Arrays.fill(inside, false);
+		Arrays.fill(outside, true);
 		
 		state = new StringBuffer();
 		for(char c : answer){
 			if(Character.isLetter(c)){
 				state.append("_");
+				for(int i = 0; i < 26; i++){
+					if(c == LETTERS[i]){
+						inside[i] = true;
+						outside[i] = false;
+						break;
+					}
+				}
 			}
 			else{
 				state.append(c);
@@ -84,5 +96,42 @@ public class Phrase {
 			}
 		}
 		return true;
+	}
+	
+	public boolean[] letterElim(){
+		boolean[] toElim = new boolean[26];
+		Arrays.fill(toElim, false);
+		ArrayList<Integer> candidates = new ArrayList<Integer>();
+		for(int i = 0; i < 26; i++){
+			if(outside[i] & !guessed[i]){
+				candidates.add(i);
+			}
+		}
+		
+		while(candidates.size() > 5){
+			Random r = new Random();
+			int next = r.nextInt(candidates.size());
+			candidates.remove(next);
+		}
+		
+		for(int i = 0; i < 26; i++){
+			if(candidates.contains(i)){
+				toElim[i] = true;
+				guessed[i] = true;
+			}
+		}
+		return toElim;
+	}
+	
+	public void letterReveal(){
+		ArrayList<Integer> candidates = new ArrayList<Integer>();
+		for(int i = 0; i < 26; i++){
+			if(inside[i] & !guessed[i]){
+				candidates.add(i);
+			}
+		}
+		Random r = new Random();
+		char c = LETTERS[candidates.get(r.nextInt(candidates.size()))];
+		guessLetter(c);
 	}
 }

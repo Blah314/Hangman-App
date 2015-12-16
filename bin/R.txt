@@ -617,7 +617,9 @@ int string abc_shareactionprovider_share_with 0x7f0a0010
 int string abc_shareactionprovider_share_with_application 0x7f0a000f
 int string abc_toolbar_collapse_description 0x7f0a0004
 int string action_settings 0x7f0a0013
+int string alreadyActive 0x7f0a0038
 int string alreadyBeaten 0x7f0a0036
+int string alreadyUsed 0x7f0a0037
 int string app_name 0x7f0a0011
 int string backButton 0x7f0a001d
 int string cEasy 0x7f0a0024

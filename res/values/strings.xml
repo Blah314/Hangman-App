@@ -106,5 +106,7 @@
     <string name="nextRound">Next></string>
     <string name="gameWon">YOU WIN!</string>
     <string name="alreadyBeaten">You have already beat this mode - why not try something more challenging?</string>
+    <string name="alreadyUsed">This powerup is unavailable.</string>
+    <string name="alreadyActive">This powerup is already active.</string>
 
 </resources>

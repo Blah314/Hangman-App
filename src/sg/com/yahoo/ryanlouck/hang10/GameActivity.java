@@ -30,11 +30,13 @@ public class GameActivity extends Activity {
 	private int gameMode, roundNo, lives;
 	private ArrayList<Category> categories;
 	private Category currCat;
+	private boolean fgUsed, leUsed, lrUsed, lsUsed;
+	private boolean fgActive, lsActive;
 	private TextView round, livesLeft, title, display;
 	private Button[] letterButtons;
 	private Button backButton, nextRoundButton;
 	private ImageButton freeGuessButton, letterElimButton, letterRevealButton, lifeSaverButton;
-	private View.OnClickListener letterChooser;
+	private View.OnClickListener letterChooser, fgUser, leUser, lrUser, lsUser;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +49,16 @@ public class GameActivity extends Activity {
 		gameMode = gameDetails.getInt("mode", 0);
 		roundNo = gameDetails.getInt("round", 1);
 		lives = gameDetails.getInt("livesLeft", -1);
-		int chosenCat = gameDetails.getInt("chosenCat");
+		int chosenCat = gameDetails.getInt("chosenCat", 0);
+		fgUsed = gameDetails.getBoolean("fg", false);
+		leUsed = gameDetails.getBoolean("le", false);
+		lrUsed = gameDetails.getBoolean("lr", false);
+		lsUsed = gameDetails.getBoolean("ls", false);
 		categories = (ArrayList<Category>) gameDetails.getSerializable("categories");
 		currCat = categories.get(chosenCat);
 		p = new Phrase(gameDetails.getString("next"));
+		fgActive = false;
+		lsActive = false;
 		
 		round = (TextView) findViewById(R.id.roundNum);
 		livesLeft = (TextView) findViewById(R.id.lives);
@@ -92,7 +100,23 @@ public class GameActivity extends Activity {
 						}
 						else{
 							boolean correct = p.guessLetter(LETTERS[i]);
-							if(!correct) lives -= 1;
+							if(!correct & !fgActive){
+								if(!fgActive){
+									lives -= 1;
+								}
+							}
+							else if(lsActive){
+								lives += p.getLastGuess();
+							}
+							
+							if(fgActive){
+								fgActive = false;
+								freeGuessButton.getBackground().setColorFilter(RED);
+							}
+							if(lsActive){
+								lsActive = false;
+								lifeSaverButton.getBackground().setColorFilter(RED);
+							}
 							updateFields();
 							v.getBackground().setColorFilter(RED);
 						}			
@@ -111,6 +135,121 @@ public class GameActivity extends Activity {
 		letterRevealButton = (ImageButton) findViewById(R.id.letterReveal);
 		lifeSaverButton = (ImageButton) findViewById(R.id.lifeSaver);
 		
+		if(fgUsed){
+			freeGuessButton.getBackground().setColorFilter(RED);
+		}
+		else{
+			freeGuessButton.getBackground().setColorFilter(GREEN);
+		}
+		
+		if(leUsed){
+			letterElimButton.getBackground().setColorFilter(RED);
+		}
+		else{
+			letterElimButton.getBackground().setColorFilter(GREEN);
+		}
+		
+		if(lrUsed){
+			letterRevealButton.getBackground().setColorFilter(RED);
+		}
+		else{
+			letterRevealButton.getBackground().setColorFilter(GREEN);
+		}
+		
+		if(lsUsed){
+			lifeSaverButton.getBackground().setColorFilter(RED);
+		}
+		else{
+			lifeSaverButton.getBackground().setColorFilter(GREEN);
+		}
+		
+		fgUser = new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(fgActive){
+					CharSequence text = getResources().getString(R.string.alreadyActive);
+					int duration = Toast.LENGTH_SHORT;
+					
+					Toast t = Toast.makeText(getApplicationContext(), text, duration);
+					t.show();
+				}
+				else if(fgUsed){
+					CharSequence text = getResources().getString(R.string.alreadyUsed);
+					int duration = Toast.LENGTH_SHORT;
+					
+					Toast t = Toast.makeText(getApplicationContext(), text, duration);
+					t.show();
+				}
+				else{
+					fgActivate();
+				}
+			}
+		};
+		
+		leUser = new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(leUsed){
+					CharSequence text = getResources().getString(R.string.alreadyUsed);
+					int duration = Toast.LENGTH_SHORT;
+					
+					Toast t = Toast.makeText(getApplicationContext(), text, duration);
+					t.show();
+				}
+				else{
+					leActivate();
+				}
+			}
+		};
+		
+		lrUser = new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(lrUsed){
+					CharSequence text = getResources().getString(R.string.alreadyUsed);
+					int duration = Toast.LENGTH_SHORT;
+					
+					Toast t = Toast.makeText(getApplicationContext(), text, duration);
+					t.show();
+				}
+				else{
+					lrActivate();
+				}
+			}
+		};
+		
+		lsUser = new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(lsActive){
+					CharSequence text = getResources().getString(R.string.alreadyActive);
+					int duration = Toast.LENGTH_SHORT;
+					
+					Toast t = Toast.makeText(getApplicationContext(), text, duration);
+					t.show();
+				}
+				else if(lsUsed){
+					CharSequence text = getResources().getString(R.string.alreadyUsed);
+					int duration = Toast.LENGTH_SHORT;
+					
+					Toast t = Toast.makeText(getApplicationContext(), text, duration);
+					t.show();
+				}
+				else{
+					lsActivate();
+				}
+			}
+		};
+		
+		freeGuessButton.setOnClickListener(fgUser);
+		letterElimButton.setOnClickListener(leUser);
+		letterRevealButton.setOnClickListener(lrUser);
+		lifeSaverButton.setOnClickListener(lsUser);
+		
 		backButton = (Button) findViewById(R.id.backButton);
 		
 		backButton.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +263,37 @@ public class GameActivity extends Activity {
 		
 		nextRoundButton = (Button) findViewById(R.id.nextRoundButton);
 		nextRoundButton.setVisibility(View.INVISIBLE);
+	}
+	
+	public void fgActivate(){
+		fgActive = true;
+		fgUsed = true;
+		freeGuessButton.getBackground().setColorFilter(YELLOW);
+	}
+	
+	public void leActivate(){
+		leUsed = true;
+		boolean[] elim = p.letterElim();
+		for(int i = 0; i < 26; i++){
+			if(elim[i]){
+				letterButtons[i].getBackground().setColorFilter(RED);
+			}
+		}
+		letterElimButton.getBackground().setColorFilter(RED);
+		updateFields();
+	}
+	
+	public void lrActivate(){
+		lrUsed = true;
+		p.letterReveal();
+		letterRevealButton.getBackground().setColorFilter(RED);
+		updateFields();
+	}
+	
+	public void lsActivate(){
+		lsActive = true;
+		lsUsed = true;
+		lifeSaverButton.getBackground().setColorFilter(YELLOW);
 	}
 	
 	public void updateFields(){
@@ -144,6 +314,11 @@ public class GameActivity extends Activity {
 			for(Button b : letterButtons){
 				b.setOnClickListener(null);
 			}
+			
+			freeGuessButton.setOnClickListener(null);
+			letterElimButton.setOnClickListener(null);
+			letterRevealButton.setOnClickListener(null);
+			lifeSaverButton.setOnClickListener(null);
 			
 			if(roundNo == 10){
 				SharedPreferences gameData = getSharedPreferences("modesCompleted", 0);
@@ -189,6 +364,8 @@ public class GameActivity extends Activity {
 				String[] beatComments = getResources().getStringArray(R.array.beatComments);
 				String[] modes = getResources().getStringArray(R.array.modeNames);
 				
+				System.out.println(beatComments[gameMode]);
+				
 				EndGameDialog edg = new EndGameDialog(modes[gameMode], beatComments[gameMode], beatBefore);
 				edg.show(getFragmentManager(), "win");
 				
@@ -209,6 +386,10 @@ public class GameActivity extends Activity {
 						nextRound.putExtra("round", roundNo + 1);
 						nextRound.putExtra("livesLeft", lives);
 						nextRound.putExtra("categories", categories);
+						nextRound.putExtra("fg", fgUsed);
+						nextRound.putExtra("le", leUsed);
+						nextRound.putExtra("lr", lrUsed);
+						nextRound.putExtra("ls", lsUsed);
 						startActivity(nextRound);
 					}
 				});
