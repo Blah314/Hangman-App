@@ -6,6 +6,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
     tools:context="sg.com.yahoo.ryanlouck.hang10.GameActivity" >
 
     <TextView
@@ -26,33 +27,26 @@
         android:text="@string/placeholder"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/backButton"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/backButton" />
-
     <TextView
         android:id="@+id/phrase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/backButton"
         android:layout_centerHorizontal="true"
         android:text="@string/placeholder"
+        android:layout_below="@+id/backButton"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TableLayout
         android:id="@+id/tableLayout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/phrase"
         android:layout_above="@+id/powerUpButtons" >
 
         <TableRow
             android:id="@+id/tableRow1"
             android:layout_width="fill_parent"
+            android:layout_weight="1"
             android:layout_height="wrap_content" >
 
             <Button
@@ -61,6 +55,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+        		android:background="@drawable/blankbox"
                 android:text="A" />
 
             <Button
@@ -69,6 +64,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+        		android:background="@drawable/blankbox"
                 android:text="B" />
 
             <Button
@@ -77,6 +73,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+        		android:background="@drawable/blankbox"
                 android:text="C" />
 
             <Button
@@ -85,6 +82,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="D" />
 
             <Button
@@ -93,6 +92,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="E" />
 
             <Button
@@ -101,6 +102,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="F" />
 
             <Button
@@ -109,6 +112,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="G" />
 
             <Button
@@ -117,6 +122,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="H" />
 
             <Button
@@ -125,6 +132,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="I" />
 
             <Button
@@ -133,6 +142,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="J" />
 
             <Button
@@ -141,6 +152,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="K" />
 
             <Button
@@ -149,6 +162,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="L" />
 
             <Button
@@ -157,12 +172,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="M" />
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow2"
             android:layout_width="fill_parent"
+            android:layout_weight="1"
             android:layout_height="wrap_content" >
 
             <Button
@@ -171,6 +189,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="N" />
 
             <Button
@@ -179,6 +199,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="O" />
 
             <Button
@@ -187,6 +209,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="P" />
 
             <Button
@@ -195,6 +219,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="Q" />
 
             <Button
@@ -203,6 +229,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="R" />
 
             <Button
@@ -211,6 +239,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="S" />
 
             <Button
@@ -219,6 +249,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="T" />
 
             <Button
@@ -227,6 +259,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="U" />
 
             <Button
@@ -235,6 +269,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="V" />
 
             <Button
@@ -243,6 +279,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="W" />
 
             <Button
@@ -251,6 +289,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="X" />
 
             <Button
@@ -259,6 +299,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="Y" />
 
             <Button
@@ -267,6 +309,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
+        		android:background="@drawable/blankbox"
                 android:text="Z" />
         </TableRow>
     </TableLayout>
@@ -292,6 +336,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="0dp"
+            android:adjustViewBounds="true"
+        	android:background="@drawable/blankbox"
             android:src="@drawable/free_guess" />
 
         <ImageButton
@@ -299,6 +345,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="0dp"
+            android:adjustViewBounds="true"
+        	android:background="@drawable/blankbox"
             android:src="@drawable/letter_elim" />
 
         <ImageButton
@@ -306,6 +354,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="0dp"
+            android:adjustViewBounds="true"
+        	android:background="@drawable/blankbox"
             android:src="@drawable/letter_reveal" />
 
         <ImageButton
@@ -313,17 +363,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="0dp"
+            android:adjustViewBounds="true"
+        	android:background="@drawable/blankbox"
             android:src="@drawable/life_saver" />
 
     </LinearLayout>
 
-    <Button
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:background="@drawable/blankbox"
+        android:src="@drawable/backbutton" />
+
+    <ImageButton
         android:id="@+id/nextRoundButton"
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="@string/nextRound" />
+        android:adjustViewBounds="true"
+        android:background="@drawable/blankbox"
+        android:src="@drawable/nextbutton" />
 
 </RelativeLayout>

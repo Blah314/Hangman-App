@@ -1,7 +1,6 @@
 package sg.com.yahoo.ryanlouck.hang10;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -10,24 +9,24 @@ import java.util.Random;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class CategoryActivity extends Activity {
 	
 	final int[] MODELIVES = new int[]{50, 40, 30, 45, 50, 40, 40, 4, 35};
-	final PorterDuffColorFilter YELLOW = new PorterDuffColorFilter(Color.YELLOW, PorterDuff.Mode.OVERLAY);
-	final PorterDuffColorFilter RED = new PorterDuffColorFilter(Color.RED, PorterDuff.Mode.OVERLAY);
 	
-	private Button backButton;
+	private Typeface font;
+	private TextView header;
+	private ImageButton backButton;
 	private Button[] categoryButtons;
 	private int gameMode, roundNo, lives;
 	private boolean fgUsed, leUsed, lrUsed, lsUsed;
@@ -50,6 +49,11 @@ public class CategoryActivity extends Activity {
 		lrUsed = gameDetails.getBoolean("lr", false);
 		lsUsed = gameDetails.getBoolean("ls", false);
 		categories = (ArrayList<Category>) gameDetails.getSerializable("categories");
+		
+		font = Typeface.createFromAsset(getAssets(), "caballar.ttf");
+		
+		header = (TextView) findViewById(R.id.textView1);
+		header.setTypeface(font);
 		
 		categoryButtons = new Button[]{(Button) findViewById(R.id.button1), (Button) findViewById(R.id.button2),
 				(Button) findViewById(R.id.button3), (Button) findViewById(R.id.button4),
@@ -116,7 +120,8 @@ public class CategoryActivity extends Activity {
 			
 			for(int i = 0; i < 10; i++){
 				categoryButtons[i].setText(categories.get(i).getName());
-				categoryButtons[i].getBackground().setColorFilter(YELLOW);
+				categoryButtons[i].setTypeface(font);
+				categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.blankbox));
 			}
 			
 		}
@@ -125,10 +130,10 @@ public class CategoryActivity extends Activity {
 			for(int i = 0; i < 10; i++){
 				categoryButtons[i].setText(categories.get(i).getName());
 				if(categories.get(i).isUsed()){
-					categoryButtons[i].getBackground().setColorFilter(RED);
+					categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
 				}
 				else{
-					categoryButtons[i].getBackground().setColorFilter(YELLOW);
+					categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.blankbox));
 				}
 			}	
 		}
@@ -187,7 +192,7 @@ public class CategoryActivity extends Activity {
 			b.setOnClickListener(gameStart);
 		}
 		
-		backButton = (Button) findViewById(R.id.backButton);
+		backButton = (ImageButton) findViewById(R.id.backButton);
 		
 		backButton.setOnClickListener(new View.OnClickListener() {
 			

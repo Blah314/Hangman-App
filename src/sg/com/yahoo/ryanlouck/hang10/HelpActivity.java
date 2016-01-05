@@ -3,20 +3,22 @@ package sg.com.yahoo.ryanlouck.hang10;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class HelpActivity extends Activity {
 	
-	private Button backButton, prevButton, nextButton;
-	private TextView pageCounter, helpScreen;
+	private Typeface font;
+	private ImageButton backButton, prevButton, nextButton;
+	private TextView header, pageCounter, helpScreen;
 	private int pgNum;
 	private String[] help;
 
@@ -30,12 +32,19 @@ public class HelpActivity extends Activity {
 		pgNum = 1;
 		help = getResources().getStringArray(R.array.instructions);
 		
-		backButton = (Button) findViewById(R.id.backButton);
-		prevButton = (Button) findViewById(R.id.prevButton);
-		nextButton = (Button) findViewById(R.id.nextButton);
+		backButton = (ImageButton) findViewById(R.id.backButton);
+		prevButton = (ImageButton) findViewById(R.id.prevButton);
+		nextButton = (ImageButton) findViewById(R.id.nextButton);
 		
+		font = Typeface.createFromAsset(getAssets(), "caballar.ttf");
+		
+		header = (TextView) findViewById(R.id.helpTitle);
 		pageCounter = (TextView) findViewById(R.id.pageCounter);
 		helpScreen = (TextView) findViewById(R.id.helpScreen);
+		
+		header.setTypeface(font);
+		pageCounter.setTypeface(font);
+		helpScreen.setTypeface(font);
 		
 		helpScreen.setText(help[0]);
 		pageCounter.setText("Page " + Integer.toString(pgNum) + " of " + Integer.toString(help.length));

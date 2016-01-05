@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
     tools:context="sg.com.yahoo.ryanlouck.hang10.HelpActivity" >
 
     <TextView
@@ -16,30 +17,6 @@
         android:layout_centerHorizontal="true"
         android:text="@string/helpTitle"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/backButton" />
-
-    <Button
-        android:id="@+id/prevButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:text="@string/prevButton" />
-
-    <Button
-        android:id="@+id/nextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="@string/nextButton" />
 
     <TextView
         android:id="@+id/pageCounter"
@@ -54,9 +31,9 @@
         android:id="@+id/scrollView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/backButton"
-        android:layout_above="@+id/nextButton" >
+        android:layout_above="@+id/prevButton"
+        android:layout_centerHorizontal="true" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,5 +48,35 @@
                 android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
     </ScrollView>
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:background="@drawable/blankbox"
+        android:src="@drawable/backbutton" />
+
+    <ImageButton
+        android:id="@+id/prevButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:adjustViewBounds="true"
+        android:background="@drawable/blankbox"
+        android:src="@drawable/prevbutton" />
+
+    <ImageButton
+        android:id="@+id/nextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:adjustViewBounds="true"
+        android:background="@drawable/blankbox"
+        android:src="@drawable/nextbutton" />
 
 </RelativeLayout>

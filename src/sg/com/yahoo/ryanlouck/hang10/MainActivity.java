@@ -7,11 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivity extends Activity {
 	
-	private Button playButton, continueButton, helpButton, optionsButton;
+	private ImageButton playButton, continueButton, helpButton, optionsButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +20,10 @@ public class MainActivity extends Activity {
 	    getActionBar().hide();
 		setContentView(R.layout.activity_main);
 		
-		playButton = (Button) findViewById(R.id.playButton);
-		continueButton = (Button) findViewById(R.id.continueButton);
-		helpButton = (Button) findViewById(R.id.helpButton);
-		optionsButton = (Button) findViewById(R.id.optionsButton);
+		playButton = (ImageButton) findViewById(R.id.playButton);
+		continueButton = (ImageButton) findViewById(R.id.continueButton);
+		helpButton = (ImageButton) findViewById(R.id.helpButton);
+		optionsButton = (ImageButton) findViewById(R.id.optionsButton);
 		
 		playButton.setOnClickListener(new View.OnClickListener() {
 			

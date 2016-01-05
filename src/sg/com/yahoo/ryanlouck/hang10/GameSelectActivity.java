@@ -4,20 +4,26 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class GameSelectActivity extends Activity {
 	
-	private Button backButton, cEasy, cMedium, cHard, freeLunch, noFrills, economy, fortune, quadLife, endurance;
+	private Typeface font;
+	private TextView header;
+	private Button cEasy, cMedium, cHard, freeLunch, noFrills, economy, fortune, quadLife, endurance;
 	private View.OnClickListener gameStart;
 	private FragmentManager fm;
 	private SharedPreferences gameData;
 	private String[] gameModes, modeDescs, unlockReqs;
+	private ImageButton backButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +36,11 @@ public class GameSelectActivity extends Activity {
 		modeDescs = getResources().getStringArray(R.array.modeDesc);
 		unlockReqs = getResources().getStringArray(R.array.unlockReqs);
 		
+		font = Typeface.createFromAsset(getAssets(), "caballar.ttf");
+		
+		header = (TextView) findViewById(R.id.title);
+		header.setTypeface(font);
+		
 		cEasy = (Button) findViewById(R.id.cEasy);
 		cMedium = (Button) findViewById(R.id.cMedium);
 		cHard = (Button) findViewById(R.id.cHard);
@@ -39,6 +50,16 @@ public class GameSelectActivity extends Activity {
 		fortune = (Button) findViewById(R.id.fortune);
 		quadLife = (Button) findViewById(R.id.quadLife);
 		endurance = (Button) findViewById(R.id.endurance);
+		
+		cEasy.setTypeface(font);
+		cMedium.setTypeface(font);
+		cHard.setTypeface(font);
+		freeLunch.setTypeface(font);
+		noFrills.setTypeface(font);
+		economy.setTypeface(font);
+		fortune.setTypeface(font);
+		quadLife.setTypeface(font);
+		endurance.setTypeface(font);
 		
 		fm = getFragmentManager();
 		
@@ -99,7 +120,7 @@ public class GameSelectActivity extends Activity {
 		quadLife.setOnClickListener(gameStart);
 		endurance.setOnClickListener(gameStart);
 		
-		backButton = (Button) findViewById(R.id.backButton);
+		backButton = (ImageButton) findViewById(R.id.backButton);
 		
 		backButton.setOnClickListener(new View.OnClickListener() {
 			

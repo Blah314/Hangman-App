@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,11 +20,9 @@ public class GameActivity extends Activity {
 	
 	final char[] LETTERS = new char[]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
 			'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-	final PorterDuffColorFilter YELLOW = new PorterDuffColorFilter(Color.YELLOW, PorterDuff.Mode.OVERLAY);
-	final PorterDuffColorFilter RED = new PorterDuffColorFilter(Color.RED, PorterDuff.Mode.OVERLAY);
-	final PorterDuffColorFilter GREEN = new PorterDuffColorFilter(Color.GREEN, PorterDuff.Mode.OVERLAY);
 	
 	private Phrase p;
+	private Typeface font;
 	private int gameMode, roundNo, lives;
 	private ArrayList<Category> categories;
 	private Category currCat;
@@ -34,7 +30,7 @@ public class GameActivity extends Activity {
 	private boolean fgActive, lsActive;
 	private TextView round, livesLeft, title, display;
 	private Button[] letterButtons;
-	private Button backButton, nextRoundButton;
+	private ImageButton backButton, nextRoundButton;
 	private ImageButton freeGuessButton, letterElimButton, letterRevealButton, lifeSaverButton;
 	private View.OnClickListener letterChooser, fgUser, leUser, lrUser, lsUser;
 
@@ -60,10 +56,17 @@ public class GameActivity extends Activity {
 		fgActive = false;
 		lsActive = false;
 		
+		font = Typeface.createFromAsset(getAssets(), "caballar.ttf");
+		
 		round = (TextView) findViewById(R.id.roundNum);
 		livesLeft = (TextView) findViewById(R.id.lives);
 		title = (TextView) findViewById(R.id.categoryName);
 		display = (TextView) findViewById(R.id.phrase);
+		
+		round.setTypeface(font);
+		livesLeft.setTypeface(font);
+		title.setTypeface(font);
+		display.setTypeface(font);
 		
 		round.setText("Round: " + Integer.toString(roundNo));
 		title.setText(currCat.getName());
@@ -111,14 +114,14 @@ public class GameActivity extends Activity {
 							
 							if(fgActive){
 								fgActive = false;
-								freeGuessButton.getBackground().setColorFilter(RED);
+								freeGuessButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
 							}
 							if(lsActive){
 								lsActive = false;
-								lifeSaverButton.getBackground().setColorFilter(RED);
+								lifeSaverButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
 							}
 							updateFields();
-							v.getBackground().setColorFilter(RED);
+							v.setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
 						}			
 					}
 				}
@@ -127,7 +130,8 @@ public class GameActivity extends Activity {
 		
 		for(Button b : letterButtons){
 			b.setOnClickListener(letterChooser);
-			b.getBackground().setColorFilter(YELLOW);
+			b.setBackgroundDrawable(getResources().getDrawable(R.drawable.blankbox));
+			b.setGravity(17);
 		}
 		
 		freeGuessButton = (ImageButton) findViewById(R.id.freeGuess);
@@ -136,31 +140,31 @@ public class GameActivity extends Activity {
 		lifeSaverButton = (ImageButton) findViewById(R.id.lifeSaver);
 		
 		if(fgUsed){
-			freeGuessButton.getBackground().setColorFilter(RED);
+			freeGuessButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
 		}
 		else{
-			freeGuessButton.getBackground().setColorFilter(GREEN);
+			freeGuessButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.greenbox));
 		}
 		
 		if(leUsed){
-			letterElimButton.getBackground().setColorFilter(RED);
+			letterElimButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
 		}
 		else{
-			letterElimButton.getBackground().setColorFilter(GREEN);
+			letterElimButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.greenbox));
 		}
 		
 		if(lrUsed){
-			letterRevealButton.getBackground().setColorFilter(RED);
+			letterRevealButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
 		}
 		else{
-			letterRevealButton.getBackground().setColorFilter(GREEN);
+			letterRevealButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.greenbox));
 		}
 		
 		if(lsUsed){
-			lifeSaverButton.getBackground().setColorFilter(RED);
+			lifeSaverButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
 		}
 		else{
-			lifeSaverButton.getBackground().setColorFilter(GREEN);
+			lifeSaverButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.greenbox));
 		}
 		
 		fgUser = new View.OnClickListener() {
@@ -250,7 +254,7 @@ public class GameActivity extends Activity {
 		letterRevealButton.setOnClickListener(lrUser);
 		lifeSaverButton.setOnClickListener(lsUser);
 		
-		backButton = (Button) findViewById(R.id.backButton);
+		backButton = (ImageButton) findViewById(R.id.backButton);
 		
 		backButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -261,14 +265,14 @@ public class GameActivity extends Activity {
 			}
 		});
 		
-		nextRoundButton = (Button) findViewById(R.id.nextRoundButton);
+		nextRoundButton = (ImageButton) findViewById(R.id.nextRoundButton);
 		nextRoundButton.setVisibility(View.INVISIBLE);
 	}
 	
 	public void fgActivate(){
 		fgActive = true;
 		fgUsed = true;
-		freeGuessButton.getBackground().setColorFilter(YELLOW);
+		freeGuessButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.yellowbox));
 	}
 	
 	public void leActivate(){
@@ -276,24 +280,24 @@ public class GameActivity extends Activity {
 		boolean[] elim = p.letterElim();
 		for(int i = 0; i < 26; i++){
 			if(elim[i]){
-				letterButtons[i].getBackground().setColorFilter(RED);
+				letterButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
 			}
 		}
-		letterElimButton.getBackground().setColorFilter(RED);
+		letterElimButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
 		updateFields();
 	}
 	
 	public void lrActivate(){
 		lrUsed = true;
 		p.letterReveal();
-		letterRevealButton.getBackground().setColorFilter(RED);
+		letterRevealButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));;
 		updateFields();
 	}
 	
 	public void lsActivate(){
 		lsActive = true;
 		lsUsed = true;
-		lifeSaverButton.getBackground().setColorFilter(YELLOW);
+		lifeSaverButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.yellowbox));;
 	}
 	
 	public void updateFields(){

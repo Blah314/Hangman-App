@@ -6,15 +6,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
     tools:context="sg.com.yahoo.ryanlouck.hang10.GameSelectActivity" >
-
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/backButton" />
 
     <TextView
         android:id="@+id/title"
@@ -33,78 +26,109 @@
 
         <TableRow
             android:id="@+id/tableRow1"
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
             <Button
                 android:id="@+id/cEasy"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+        		android:background="@drawable/blankbox"
+        		android:layout_weight="1"
                 android:text="@string/cEasy" />
 
             <Button
                 android:id="@+id/cMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+        		android:background="@drawable/blankbox"
+        		android:layout_weight="1"
                 android:text="@string/cMedium" />
 
             <Button
                 android:id="@+id/cHard"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+        		android:background="@drawable/blankbox"
+        		android:layout_weight="1"
                 android:text="@string/cHard" />
 
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow2"
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
             <Button
                 android:id="@+id/freeLunch"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+        		android:background="@drawable/blankbox"
+        		android:layout_weight="1"
                 android:text="@string/freeLunch" />
 
             <Button
                 android:id="@+id/economy"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+        		android:background="@drawable/blankbox"
+        		android:layout_weight="1"
                 android:text="@string/economy" />
 
             <Button
                 android:id="@+id/quadLife"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+        		android:background="@drawable/blankbox"
+        		android:layout_weight="1"
                 android:text="@string/quadLife" />
 
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow3"
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
             <Button
                 android:id="@+id/noFrills"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+        		android:background="@drawable/blankbox"
+        		android:layout_weight="1"
                 android:text="@string/noFrills" />
 
             <Button
                 android:id="@+id/fortune"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+        		android:background="@drawable/blankbox"
+        		android:layout_weight="1"
                 android:text="@string/fortune" />
 
             <Button
                 android:id="@+id/endurance"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+        		android:background="@drawable/blankbox"
+        		android:layout_weight="1"
                 android:text="@string/endurance" />
 
         </TableRow>
     </TableLayout>
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:background="@drawable/blankbox"
+        android:src="@drawable/backbutton" />
 
 </RelativeLayout>
