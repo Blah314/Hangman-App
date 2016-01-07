@@ -61,8 +61,8 @@ public class CategoryActivity extends Activity {
 				(Button) findViewById(R.id.button7), (Button) findViewById(R.id.button8),
 				(Button) findViewById(R.id.button9), (Button) findViewById(R.id.button10)};
 		
-		if(lives == -1){
-			lives = MODELIVES[gameMode];
+		if(lives == -1 || gameMode == 8){
+			if(gameMode != 8) lives = MODELIVES[gameMode];
 			
 			try{
 				InputStream fis = getApplicationContext().getAssets().open("hangman_phrases.txt");
@@ -129,6 +129,7 @@ public class CategoryActivity extends Activity {
 		else{
 			for(int i = 0; i < 10; i++){
 				categoryButtons[i].setText(categories.get(i).getName());
+				categoryButtons[i].setTypeface(font);
 				if(categories.get(i).isUsed()){
 					categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
 				}
@@ -182,6 +183,7 @@ public class CategoryActivity extends Activity {
 							gameLaunch.putExtra("lr", lrUsed);
 							gameLaunch.putExtra("ls", lsUsed);
 							startActivity(gameLaunch);
+							finish();
 						}
 					}
 				}			
@@ -198,15 +200,9 @@ public class CategoryActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent mainLaunch = new Intent(getApplicationContext(), MainActivity.class);
-				startActivity(mainLaunch);
+				finish();
 			}
 		});
-	}
-	
-	public void onStop(){
-		super.onStop();
-		this.finish();
 	}
 
 	@Override

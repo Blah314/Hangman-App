@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,26 +14,26 @@ import android.widget.Toast;
 public class NewGameDialog extends DialogFragment {
 	
 	private int gameMode;
-	private boolean unlock1, unlock2;
+	private boolean unlocked;
 	private String modeTitle, modeUnlock, modeDesc;
 	
-	public NewGameDialog(int gM, boolean req1, boolean req2, String title, String unlock, String desc){
+	public NewGameDialog(int gM, boolean unlocked, String title, String unlock, String desc){
 		this.gameMode = gM;
-		this.unlock1 = req1;
-		this.unlock2 = req2;
+		this.unlocked = unlocked;
 		this.modeTitle = title;
 		this.modeUnlock = unlock;
 		this.modeDesc = desc;
+		
 	}
 	
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
+	public Dialog onCreateDialog(Bundle savedInstanceState) {	
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LinearLayout l = new LinearLayout(this.getActivity());
         TextView body = new TextView(this.getActivity());
         
         builder.setTitle(modeTitle);
         
-        if(unlock1 && unlock2){
+        if(unlocked){
         	body.setText("\n" + modeDesc);
         	builder.setPositiveButton(R.string.playButton, new DialogInterface.OnClickListener() {
 				

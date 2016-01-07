@@ -32,11 +32,6 @@ public class OptionsActivity extends Activity {
 		});
 	}
 	
-	public void onStop(){
-		super.onStop();
-		this.finish();
-	}
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

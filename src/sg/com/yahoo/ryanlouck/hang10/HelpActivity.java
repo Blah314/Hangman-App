@@ -53,8 +53,7 @@ public class HelpActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent mainLaunch = new Intent(getApplicationContext(), MainActivity.class);
-				startActivity(mainLaunch);
+				finish();
 			}
 		});
 		

@@ -50,9 +50,11 @@ public class GameActivity extends Activity {
 		leUsed = gameDetails.getBoolean("le", false);
 		lrUsed = gameDetails.getBoolean("lr", false);
 		lsUsed = gameDetails.getBoolean("ls", false);
+		
 		categories = (ArrayList<Category>) gameDetails.getSerializable("categories");
 		currCat = categories.get(chosenCat);
 		p = new Phrase(gameDetails.getString("next"));
+		if(gameMode == 6) p.doFortune(); // fortune mode check
 		fgActive = false;
 		lsActive = false;
 		
@@ -72,6 +74,31 @@ public class GameActivity extends Activity {
 		title.setText(currCat.getName());
 		display.setText(p.currentState());
 		livesLeft.setText("Lives Left: " + Integer.toString(lives));
+		
+		// free Lunch Mode checking
+		if(gameMode == 3){
+			fgUsed = false;
+			leUsed = true;
+			lrUsed = true;
+			lsUsed = true;
+		}
+		
+		// no frills mode checking
+		if(gameMode == 4){
+			fgUsed = true;
+			leUsed = true;
+			lrUsed = true;
+			lsUsed = true;
+		}
+		
+		// quadlife mode checking
+		if(gameMode == 7){
+			fgUsed = true;
+			leUsed = true;
+			lrUsed = true;
+			lsUsed = true;
+			lives = 4;
+		}
 		
 		letterButtons = new Button[]{(Button) findViewById(R.id.button1), (Button) findViewById(R.id.button2),
 				(Button) findViewById(R.id.button3), (Button) findViewById(R.id.button4),
@@ -132,6 +159,7 @@ public class GameActivity extends Activity {
 			b.setOnClickListener(letterChooser);
 			b.setBackgroundDrawable(getResources().getDrawable(R.drawable.blankbox));
 			b.setGravity(17);
+			b.setTypeface(font);
 		}
 		
 		freeGuessButton = (ImageButton) findViewById(R.id.freeGuess);
@@ -260,8 +288,7 @@ public class GameActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent mainLaunch = new Intent(getApplicationContext(), MainActivity.class);
-				startActivity(mainLaunch);
+				finish();
 			}
 		});
 		
@@ -289,15 +316,21 @@ public class GameActivity extends Activity {
 	
 	public void lrActivate(){
 		lrUsed = true;
-		p.letterReveal();
-		letterRevealButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));;
+		char c = p.letterReveal();
+		letterRevealButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
+		for(int i = 0; i < 26; i++){
+			if(c == LETTERS[i]){
+				letterButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
+				break;
+			}
+		}
 		updateFields();
 	}
 	
 	public void lsActivate(){
 		lsActive = true;
 		lsUsed = true;
-		lifeSaverButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.yellowbox));;
+		lifeSaverButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.yellowbox));
 	}
 	
 	public void updateFields(){
@@ -310,9 +343,13 @@ public class GameActivity extends Activity {
 			livesLeft.setText("Lives Left: X.X");
 			for(Button b : letterButtons){
 				b.setOnClickListener(null);
-			}
+			}		
+			freeGuessButton.setOnClickListener(null);
+			letterElimButton.setOnClickListener(null);
+			letterRevealButton.setOnClickListener(null);
+			lifeSaverButton.setOnClickListener(null);	
 		}
-		if(p.isSolved()){
+		if(p.isSolved() || gameMode == 6 && p.isFortuneSolved()){
 			round.setText("Round " + Integer.toString(roundNo) + " complete!");
 			
 			for(Button b : letterButtons){
@@ -324,7 +361,7 @@ public class GameActivity extends Activity {
 			letterRevealButton.setOnClickListener(null);
 			lifeSaverButton.setOnClickListener(null);
 			
-			if(roundNo == 10){
+			if(roundNo == 10 && gameMode != 8){
 				SharedPreferences gameData = getSharedPreferences("modesCompleted", 0);
 				SharedPreferences.Editor editor = gameData.edit();
 				boolean beatBefore;
@@ -368,8 +405,6 @@ public class GameActivity extends Activity {
 				String[] beatComments = getResources().getStringArray(R.array.beatComments);
 				String[] modes = getResources().getStringArray(R.array.modeNames);
 				
-				System.out.println(beatComments[gameMode]);
-				
 				EndGameDialog edg = new EndGameDialog(modes[gameMode], beatComments[gameMode], beatBefore);
 				edg.show(getFragmentManager(), "win");
 				
@@ -395,15 +430,11 @@ public class GameActivity extends Activity {
 						nextRound.putExtra("lr", lrUsed);
 						nextRound.putExtra("ls", lsUsed);
 						startActivity(nextRound);
+						finish();
 					}
 				});
 			}
 		}
-	}
-	
-	public void onStop(){
-		super.onStop();
-		this.finish();
 	}
 
 	@Override

@@ -123,7 +123,7 @@ public class Phrase {
 		return toElim;
 	}
 	
-	public void letterReveal(){
+	public char letterReveal(){
 		ArrayList<Integer> candidates = new ArrayList<Integer>();
 		for(int i = 0; i < 26; i++){
 			if(inside[i] & !guessed[i]){
@@ -133,5 +133,24 @@ public class Phrase {
 		Random r = new Random();
 		char c = LETTERS[candidates.get(r.nextInt(candidates.size()))];
 		guessLetter(c);
+		return c;
+	}
+	
+	public void doFortune(){
+		guessed[0] = true;
+		guessed[4] = true;
+		guessed[8] = true;
+		guessed[14] = true;
+		guessed[20] = true;
+	}
+	
+	public boolean isFortuneSolved(){
+		char[] rawState = state.toString().toCharArray();
+		for(int i = 0; i < rawState.length; i++){
+			if(rawState[i] == '_' && answer[i] != 'A' && answer[i] != 'E' && answer[i] != 'I' && answer[i] != 'O' && answer[i] != 'U'){
+				return false;
+			}
+		}
+		return true;
 	}
 }

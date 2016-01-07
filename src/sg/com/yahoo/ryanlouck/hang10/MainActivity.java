@@ -52,11 +52,6 @@ public class MainActivity extends Activity {
 			}
 		});
 	}
-	
-	public void onStop(){
-		super.onStop();
-		this.finish();
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
