@@ -71,12 +71,12 @@
                 android:text="@string/freeLunch" />
 
             <Button
-                android:id="@+id/economy"
+                android:id="@+id/escalation"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
         		android:background="@drawable/blankbox"
         		android:layout_weight="1"
-                android:text="@string/economy" />
+                android:text="@string/escalation" />
 
             <Button
                 android:id="@+id/quadLife"

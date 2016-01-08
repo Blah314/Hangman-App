@@ -33,6 +33,7 @@ public class GameActivity extends Activity {
 	private ImageButton backButton, nextRoundButton;
 	private ImageButton freeGuessButton, letterElimButton, letterRevealButton, lifeSaverButton;
 	private View.OnClickListener letterChooser, fgUser, leUser, lrUser, lsUser;
+	private String[] enduranceComments;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,7 @@ public class GameActivity extends Activity {
 		if(gameMode == 6) p.doFortune(); // fortune mode check
 		fgActive = false;
 		lsActive = false;
+		enduranceComments = getResources().getStringArray(R.array.enduranceComments);
 		
 		font = Typeface.createFromAsset(getAssets(), "caballar.ttf");
 		
@@ -130,13 +132,22 @@ public class GameActivity extends Activity {
 						}
 						else{
 							boolean correct = p.guessLetter(LETTERS[i]);
-							if(!correct & !fgActive){
+							if(!correct){
 								if(!fgActive){
-									lives -= 1;
+									if(gameMode != 5){ // escalation mode checking
+										lives -= 1;
+									}
+									else{
+										lives -= roundNo;
+									}
 								}
 							}
 							else if(lsActive){
 								lives += p.getLastGuess();
+							}
+							
+							else if(gameMode == 5){ // escalation mode checking
+								lives += 1;
 							}
 							
 							if(fgActive){
@@ -347,9 +358,35 @@ public class GameActivity extends Activity {
 			freeGuessButton.setOnClickListener(null);
 			letterElimButton.setOnClickListener(null);
 			letterRevealButton.setOnClickListener(null);
-			lifeSaverButton.setOnClickListener(null);	
+			lifeSaverButton.setOnClickListener(null);
+			
+			if(gameMode == 8){ // endurance mode checking
+				title.setText("GAME OVER. You made it to Round " + Integer.toString(roundNo) + ".");
+				if(roundNo <= 5){
+					display.setText(enduranceComments[0]);
+				}
+				else if(roundNo <= 10){
+					display.setText(enduranceComments[1]);
+				}
+				else if(roundNo <= 15){
+					display.setText(enduranceComments[2]);
+				}
+				else if(roundNo <= 20){
+					display.setText(enduranceComments[3]);
+				}
+				else if(roundNo <= 25){
+					display.setText(enduranceComments[4]);
+				}
+				else if(roundNo <= 30){
+					display.setText(enduranceComments[5]);
+				}
+				else{
+					display.setText(enduranceComments[6]);
+				}
+			}
 		}
-		if(p.isSolved() || gameMode == 6 && p.isFortuneSolved()){
+		
+		if(p.isSolved() || gameMode == 6 && p.isFortuneSolved()){ // fortune mode checking
 			round.setText("Round " + Integer.toString(roundNo) + " complete!");
 			
 			for(Button b : letterButtons){
@@ -361,7 +398,7 @@ public class GameActivity extends Activity {
 			letterRevealButton.setOnClickListener(null);
 			lifeSaverButton.setOnClickListener(null);
 			
-			if(roundNo == 10 && gameMode != 8){
+			if(roundNo == 10 && gameMode != 8){ // endurance mode checking
 				SharedPreferences gameData = getSharedPreferences("modesCompleted", 0);
 				SharedPreferences.Editor editor = gameData.edit();
 				boolean beatBefore;
@@ -388,7 +425,7 @@ public class GameActivity extends Activity {
 					editor.putBoolean("noFrills", true);
 					break;
 				case 5:
-					beatBefore = gameData.getBoolean("economy", false);
+					beatBefore = gameData.getBoolean("escalation", false);
 					editor.putBoolean("economy", true);
 					break;
 				case 6:

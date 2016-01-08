@@ -28,16 +28,23 @@
             Each game of Hang 10 consists of - well - 10 rounds of Hangman puzzles - each of increasing difficulty.\n\n
             The concept is simple - pick a category and you\'ll be given a phrase to guess. Guess letters by tapping on them and if they are in the phrase they are revealed. If not, you lose a life! :(\n\n
             You win each round by completely revealing the phrase. Win 10 rounds without losing all your lives and you win! </item>
-        <item>Power-Ups\n\n
-            Hang 10 can sometimes be a VERY difficult game. To help you along, there are powerups at your disposal. Each can only be used once per game and none can be used on Round 10.\n\n
-            The Life Saver: Depending on how many of the letter you guess next are in the phrase, you will gain lives corressponding to that amount.\n\n
-            The Letter Reveal: Reveals a random letter in the phrase.\n\n
-            The Letter Eliminator: Eliminates five random letters not in the phrase from those that have not been guessed.\n\n
-            The Free Guess: If you guess wrongly in your next turn, you won\'t lose a life!</item>
         <item>Game Modes\n\n
 		    Completing the game the first time round grants you access to new game modes to test yourself against.\n\n
 		    Some game modes restrict your powerups, some have quirky new features and others are just plain difficult.\n\n
 		    Can you conquer them all?</item>
+    </string-array>
+    
+    <string-array name="PowerupDescs">
+        <item>The Life Saver: Depending on how many of the letter you guess next are in the phrase, you will gain lives corressponding to that amount.</item>
+        <item>The Letter Reveal: Reveals a random letter in the phrase.</item>
+        <item>The Letter Eliminator: Eliminates five random letters not in the phrase from those that have not been guessed.</item>
+        <item>The Free Guess: If you guess wrongly in your next turn, you won\'t lose a life!</item>
+    </string-array>
+    
+    <string-array name="instructionPages">
+        <item>Basics</item>
+        <item>Game Modes</item>
+        <item>Power Ups</item>
     </string-array>
 
     <string name="modeSelect">Select a game mode:</string>
@@ -46,7 +53,7 @@
     <string name="cHard">Classic\nHard</string>
     <string name="freeLunch">Free\nLunch</string>
     <string name="noFrills">No\nFrills</string>
-    <string name="economy">Economy</string>
+    <string name="escalation">Escalation</string>
     <string name="fortune">Fortune</string>
     <string name="quadLife">Quad\nLife</string>
     <string name="endurance">Endurance</string>
@@ -57,7 +64,7 @@
         <item>Classic Hard</item>
         <item>Free Lunch</item>
         <item>No Frills</item>
-        <item>Economy</item>
+        <item>Escalation</item>
         <item>Fortune</item>
         <item>Quad-Life</item>
         <item>Endurance</item>
@@ -68,7 +75,7 @@
         <item>Incredibly Hard. Just 30 lives to get through 10 puzzles.</item>
         <item>You get one Free Guess per round, but no other powerups. 45 lives.</item>
         <item>How Hang 10 was meant to be played. No powerups. 50 lives.</item>
-        <item>Earn money by guessing letters - the rarer the better. Buy powerups with your money. 40 lives.</item>
+        <item>Correct guesses grant you extra lives, but your errors get more deadly as the game progresses. 80 lives.</item>
         <item>Just like the famous gameshow - you cannot guess vowels. 40 lives.</item>
         <item>Hardcore. You get 4 lives a puzzle. No more, no less. No powerups either.</item>
         <item>The ultimate challenge. Infinite hard puzzles - how many can you solve with 35 lives?</item>
@@ -80,20 +87,29 @@
         <item>Complete Classic Easy to unlock.</item>
         <item>Complete Free Lunch to unlock.</item>
         <item>Complete Free Lunch and Classic Medium to unlock.</item>
-        <item>Complete No Frills and Economy to unlock.</item>
-        <item>Complete Economy and Classic Hard to unlock.</item>
+        <item>Complete No Frills and Escalation to unlock.</item>
+        <item>Complete Escalation and Classic Hard to unlock.</item>
         <item>Complete Fortune and Quad-Life to unlock.</item>
     </string-array>
     <string-array name="beatComments">
         <item>That was almost too easy - right?</item>
         <item>Hopefully that wasn\'t too hard.</item>
         <item>Nice work! But there are harder modes to come...</item>
-        <item>Meh. Arguably Free Lunch is the easiest mode.</item>
+        <item>Meh. Arguably Free Lunch is the easiest game mode.</item>
         <item>Who needs power-ups?</item>
-        <item>How much money did you not use?</item>
+        <item>How stressful were those last few rounds?</item>
         <item>Too bad to don\'t win real money...</item>
         <item>I have no words. That was very, very impressive.</item>
         <item>You can\'t beat endurance mode. This is a bug.</item>
+    </string-array>
+    <string-array name="enduranceComments">
+        <item>Weak... How did you even unlock this mode?</item>
+        <item>Meh. You\'re better than this.</item>
+        <item>You did okay... I guess.</item>
+        <item>Not bad... Not bad at all...</item>
+        <item>Impressive... Can you do even better though?</item>
+        <item>Much respect to you.</item>
+        <item>You\'re either too good or cheating. I suspect the latter.</item>
     </string-array>
 
     <string name="modeLocked">You need to unlock this mode first.</string>

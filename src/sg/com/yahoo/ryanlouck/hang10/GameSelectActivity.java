@@ -43,7 +43,7 @@ public class GameSelectActivity extends Activity {
 		
 		modeButtons = new Button[]{(Button) findViewById(R.id.cEasy), (Button) findViewById(R.id.cMedium),
 				(Button) findViewById(R.id.cHard), (Button) findViewById(R.id.freeLunch), (Button) findViewById(R.id.noFrills),
-				(Button) findViewById(R.id.economy), (Button) findViewById(R.id.fortune), (Button) findViewById(R.id.quadLife),
+				(Button) findViewById(R.id.escalation), (Button) findViewById(R.id.fortune), (Button) findViewById(R.id.quadLife),
 				(Button) findViewById(R.id.endurance)};
 		
 		fm = getFragmentManager();
@@ -52,7 +52,7 @@ public class GameSelectActivity extends Activity {
 		
 		gameModesCompleted = new boolean[]{gameData.getBoolean("cEasy", false), gameData.getBoolean("cMedium", false),
 				gameData.getBoolean("cHard", false), gameData.getBoolean("freeLunch", false), gameData.getBoolean("noFrills", false),
-				gameData.getBoolean("economy", false), gameData.getBoolean("fortune", false), gameData.getBoolean("quadLife", false), false};
+				gameData.getBoolean("escalation", false), gameData.getBoolean("fortune", false), gameData.getBoolean("quadLife", false), false};
 		
 		modesUnlocked = new boolean[]{true, gameModesCompleted[0], gameModesCompleted[1],
 				gameModesCompleted[0], gameModesCompleted[3], gameModesCompleted[1] && gameModesCompleted[3],

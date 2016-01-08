@@ -121,7 +121,7 @@ public class CategoryActivity extends Activity {
 			for(int i = 0; i < 10; i++){
 				categoryButtons[i].setText(categories.get(i).getName());
 				categoryButtons[i].setTypeface(font);
-				categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.blankbox));
+				categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.catbox));
 			}
 			
 		}
@@ -131,10 +131,10 @@ public class CategoryActivity extends Activity {
 				categoryButtons[i].setText(categories.get(i).getName());
 				categoryButtons[i].setTypeface(font);
 				if(categories.get(i).isUsed()){
-					categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
+					categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.redcatbox));
 				}
 				else{
-					categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.blankbox));
+					categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.catbox));
 				}
 			}	
 		}
@@ -158,6 +158,10 @@ public class CategoryActivity extends Activity {
 				default:
 					diff = 2;
 					break;				
+				}
+				
+				if(gameMode == 8){ // endurance mode checking
+					diff = 2;
 				}
 				
 				for(int i = 0; i < 10; i++){
