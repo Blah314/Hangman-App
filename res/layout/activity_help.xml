@@ -97,87 +97,76 @@
                     android:layout_height="wrap_content"
                     android:text="@string/placeholder" />
 
-                <TableLayout
+                <RelativeLayout
                     android:id="@+id/powerupTable"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
 
-                    <TableRow
-                        android:id="@+id/tableRow1"
+                    <ImageView
+                        android:id="@+id/imageView1"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/free_guess" />
 
-                        <ImageView
-                            android:id="@+id/imageView1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/free_guess" />
-
-                        <TextView
-                            android:id="@+id/fgDesc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/placeholder" />
-
-                    </TableRow>
-
-                    <TableRow
-                        android:id="@+id/tableRow2"
+                    <TextView
+                        android:id="@+id/fgDesc"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imageView1"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/fgDesc" />
 
-                        <ImageView
-                            android:id="@+id/imageView2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/life_saver" />
-
-                        <TextView
-                            android:id="@+id/lsDesc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/placeholder" />
-
-                    </TableRow>
-
-                    <TableRow
-                        android:id="@+id/tableRow3"
+                    <ImageView
+                        android:id="@+id/imageView2"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/fgDesc"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/life_saver" />
 
-                        <ImageView
-                            android:id="@+id/imageView3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/letter_elim" />
-
-                        <TextView
-                            android:id="@+id/leDesc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/placeholder" />
-
-                    </TableRow>
-
-                    <TableRow
-                        android:id="@+id/tableRow4"
+                    <TextView
+                        android:id="@+id/lsDesc"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imageView2"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/lsDesc" />
 
-                        <ImageView
-                            android:id="@+id/imageView4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/letter_reveal" />
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/lsDesc"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/letter_elim" />
 
-                        <TextView
-                            android:id="@+id/lrDesc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/placeholder" />
+                    <TextView
+                        android:id="@+id/leDesc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imageView3"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/leDesc" />
 
-                    </TableRow>
-                </TableLayout>
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/leDesc"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/letter_reveal" />
+
+                    <TextView
+                        android:id="@+id/lrDesc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imageView4"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/lrDesc" />
+
+                </RelativeLayout>
 
             </RelativeLayout>
 

@@ -10,7 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TableLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class HelpActivity extends Activity {
@@ -18,8 +18,8 @@ public class HelpActivity extends Activity {
 	private Typeface font;
 	private ImageButton backButton;
 	private TextView header, page0, page1, page2, fgDesc, lsDesc, leDesc, lrDesc;
-	private TableLayout powerupTable;
-	private String[] helpHeaders, powerupDescs, help;
+	private RelativeLayout powerupTable;
+	private String[] helpHeaders, help;
 	private Button help1, help2, help3;
 
 	@Override
@@ -31,7 +31,6 @@ public class HelpActivity extends Activity {
 		
 		help = getResources().getStringArray(R.array.instructions);
 		helpHeaders = getResources().getStringArray(R.array.instructionPages);
-		powerupDescs = getResources().getStringArray(R.array.PowerupDescs);
 		
 		backButton = (ImageButton) findViewById(R.id.backButton);
 		
@@ -62,12 +61,8 @@ public class HelpActivity extends Activity {
 		page0.setText(help[0]);
 		page1.setText(help[1]);
 		page2.setText(help[2]);
-		fgDesc.setText(powerupDescs[3]);
-		lsDesc.setText(powerupDescs[0]);
-		lrDesc.setText(powerupDescs[1]);
-		leDesc.setText(powerupDescs[2]);
 		
-		powerupTable = (TableLayout) findViewById(R.id.powerupTable);
+		powerupTable = (RelativeLayout) findViewById(R.id.powerupTable);
 		
 		help1.setTypeface(font);
 		help2.setTypeface(font);

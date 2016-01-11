@@ -34,12 +34,10 @@
 		    Can you conquer them all?</item>
     </string-array>
     
-    <string-array name="PowerupDescs">
-        <item>The Life Saver: Depending on how many of the letter you guess next are in the phrase, you will gain lives corressponding to that amount.</item>
-        <item>The Letter Reveal: Reveals a random letter in the phrase.</item>
-        <item>The Letter Eliminator: Eliminates five random letters not in the phrase from those that have not been guessed.</item>
-        <item>The Free Guess: If you guess wrongly in your next turn, you won\'t lose a life!</item>
-    </string-array>
+    <string name="fgDesc">The Free Guess: If you guess wrongly in your next turn, you won\'t lose a life!</string>
+    <string name="leDesc">The Letter Eliminator: Eliminates five random letters not in the phrase from those that have not been guessed.</string>
+    <string name="lrDesc">The Letter Reveal: Reveals a random letter in the phrase.</string>
+    <string name="lsDesc">The Life Saver: Depending on how many of the letter you guess next are in the phrase, you will gain lives corressponding to that amount.</string>
     
     <string-array name="instructionPages">
         <item>Basics</item>
