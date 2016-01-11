@@ -30,10 +30,14 @@
            android:id="@+id/playButton"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
+           android:layout_weight="1"
            android:adjustViewBounds="true"
            android:background="@drawable/blankbox"
+           android:paddingBottom="5dp"
+           android:paddingLeft="5dp"
+           android:paddingRight="5dp"
+           android:paddingTop="5dp"
            android:scaleType="fitXY"
-           android:layout_weight="1"
            android:src="@drawable/playbutton" />
 
        <ImageButton
@@ -43,6 +47,10 @@
            android:adjustViewBounds="true"
            android:background="@drawable/blankbox"
            android:scaleType="fitXY"
+           android:paddingBottom="5dp"
+           android:paddingLeft="5dp"
+           android:paddingRight="5dp"
+           android:paddingTop="5dp"
            android:layout_weight="1"
            android:src="@drawable/contbutton" />
 
@@ -54,6 +62,10 @@
            android:background="@drawable/blankbox"
            android:scaleType="fitXY"
            android:layout_weight="1"
+           android:paddingBottom="5dp"
+           android:paddingLeft="5dp"
+           android:paddingRight="5dp"
+           android:paddingTop="5dp"
            android:src="@drawable/helpbutton" />
 
        <ImageButton
@@ -64,6 +76,10 @@
            android:background="@drawable/blankbox"
            android:scaleType="fitXY"
            android:layout_weight="1"
+           android:paddingBottom="5dp"
+           android:paddingLeft="5dp"
+           android:paddingRight="5dp"
+           android:paddingTop="5dp"
            android:src="@drawable/optionsbutton" />
    </LinearLayout>
 
