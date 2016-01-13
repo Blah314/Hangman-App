@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 public class CategoryActivity extends Activity {
 	
-	final int[] MODELIVES = new int[]{50, 40, 30, 45, 50, 40, 40, 4, 35};
+	final int[] MODELIVES = new int[]{50, 40, 30, 45, 50, 80, 40, 4, 35};
 	
 	private Typeface font;
 	private TextView header;

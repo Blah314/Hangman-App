@@ -71,6 +71,7 @@ public class GameActivity extends Activity {
 		livesLeft.setTypeface(font);
 		title.setTypeface(font);
 		display.setTypeface(font);
+		display.setGravity(17);
 		
 		round.setText("Round: " + Integer.toString(roundNo));
 		title.setText(currCat.getName());
@@ -348,7 +349,7 @@ public class GameActivity extends Activity {
 		display.setText(p.currentState());
 		livesLeft.setText("Lives Left: " + Integer.toString(lives));
 		
-		if(lives == 0){
+		if(lives <= 0){
 			title.setText(R.string.gameOver);
 			display.setText(p.correctAnswer());
 			livesLeft.setText("Lives Left: X.X");
@@ -450,7 +451,6 @@ public class GameActivity extends Activity {
 			
 			else{
 				display.setText(p.currentState() + "\nPress Next to continue.");
-				display.setGravity(17);
 				
 				nextRoundButton.setVisibility(View.VISIBLE);
 				nextRoundButton.setOnClickListener(new View.OnClickListener() {
