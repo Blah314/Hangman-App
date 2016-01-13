@@ -427,7 +427,7 @@ public class GameActivity extends Activity {
 					break;
 				case 5:
 					beatBefore = gameData.getBoolean("escalation", false);
-					editor.putBoolean("economy", true);
+					editor.putBoolean("escalation", true);
 					break;
 				case 6:
 					beatBefore = gameData.getBoolean("fortune", false);
