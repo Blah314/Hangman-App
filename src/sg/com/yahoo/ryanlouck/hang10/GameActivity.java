@@ -473,6 +473,19 @@ public class GameActivity extends Activity {
 			}
 		}
 	}
+	
+	public void onStop(){
+		super.onStop();
+		if(lives <= 0){
+			finish();
+		}
+		if(p.isSolved() && roundNo == 10 && gameMode != 8){
+			finish();
+		}
+		if(p.isFortuneSolved() && roundNo == 10 && gameMode == 6){
+			finish();
+		}
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
