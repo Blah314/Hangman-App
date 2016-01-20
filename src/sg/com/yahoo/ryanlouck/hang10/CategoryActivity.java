@@ -28,8 +28,9 @@ public class CategoryActivity extends Activity {
 	private TextView header;
 	private ImageButton backButton;
 	private Button[] categoryButtons;
+	private String[] resumedCategories, resumedCategoryStatus;
 	private int gameMode, roundNo, lives;
-	private boolean fgUsed, leUsed, lrUsed, lsUsed;
+	private boolean fgUsed, leUsed, lrUsed, lsUsed, resumed;
 	private ArrayList<Category> categories;
 	private View.OnClickListener gameStart;
 
@@ -48,6 +49,9 @@ public class CategoryActivity extends Activity {
 		leUsed = gameDetails.getBoolean("le", false);
 		lrUsed = gameDetails.getBoolean("lr", false);
 		lsUsed = gameDetails.getBoolean("ls", false);
+		resumed = gameDetails.getBoolean("resumed", false);
+		resumedCategories = gameDetails.getStringArray("resCats");
+		resumedCategoryStatus = gameDetails.getStringArray("resCatStatus");
 		categories = (ArrayList<Category>) gameDetails.getSerializable("categories");
 		
 		font = Typeface.createFromAsset(getAssets(), "caballar.ttf");
@@ -114,16 +118,97 @@ public class CategoryActivity extends Activity {
 			
 			Random r = new Random();
 			while(categories.size() > 10){
-				int next = r.nextInt(categories.size());
-				categories.remove(next);
+				int i = r.nextInt(categories.size());
+				categories.remove(i);
 			}
 			
 			for(int i = 0; i < 10; i++){
 				categoryButtons[i].setText(categories.get(i).getName());
 				categoryButtons[i].setTypeface(font);
 				categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.catbox));
+			}						
+		}
+		
+		else if(resumed){
+			try{
+				InputStream fis = getApplicationContext().getAssets().open("hangman_phrases.txt");
+				InputStreamReader isr = new InputStreamReader(fis);
+				BufferedReader br = new BufferedReader(isr);
+				
+				categories = new ArrayList<Category>();
+				
+				String currCat;
+				int currDiff = 0;
+				ArrayList<String> currPhrases = new ArrayList<String>();
+				Hashtable<Integer, ArrayList<String>> currCategory = new Hashtable<Integer, ArrayList<String>>();
+				
+				String line = br.readLine();
+				currCat = line.substring(5);
+				
+				line = br.readLine();
+				line = br.readLine();			
+				
+				while(line != null){
+					if(line.startsWith("CAT: ")){
+						currCategory.put(currDiff, currPhrases);
+						currPhrases = new ArrayList<String>();
+						Category newCat = new Category(currCat, currCategory);
+						System.out.println(newCat.getName());
+						for(int i = 0; i < 10; i++){
+							System.out.println(resumedCategories[i]);
+							if(newCat.getName().equals(resumedCategories[i])){
+								if(Boolean.parseBoolean(resumedCategoryStatus[i])){
+									newCat.setUsed();
+								}
+								categories.add(newCat);
+								System.out.println("Category Added.");
+								break;
+							}
+						}
+						currCat = line.substring(5);
+						currDiff = 0;
+						currCategory = new Hashtable<Integer, ArrayList<String>>();
+						line = br.readLine();
+					}
+					else if(line.startsWith("DIFF: ")){
+						currCategory.put(currDiff, currPhrases);
+						currDiff += 1;
+						currPhrases = new ArrayList<String>();
+					}
+					else{
+						currPhrases.add(line);
+					}
+					line = br.readLine();
+				}
+				
+				currCategory.put(currDiff, currPhrases);
+				Category newCat = new Category(currCat, currCategory);
+				System.out.println(newCat.getName());
+				for(int i = 0; i < 10; i++){
+					System.out.println(resumedCategories[i]);
+					if(newCat.getName().equals(resumedCategories[i])){
+						if(Boolean.parseBoolean(resumedCategoryStatus[i])){
+							newCat.setUsed();
+						}
+						categories.add(newCat);
+						break;
+					}
+				}
+			}
+			catch(Exception e){
+				e.printStackTrace();
 			}
 			
+			for(int i = 0; i < 10; i++){
+				categoryButtons[i].setText(categories.get(i).getName());
+				categoryButtons[i].setTypeface(font);
+				if(categories.get(i).isUsed()){
+					categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.redcatbox));
+				}
+				else{
+					categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.catbox));
+				}
+			}
 		}
 		
 		else{

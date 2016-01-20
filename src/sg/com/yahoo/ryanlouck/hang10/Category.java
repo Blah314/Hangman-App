@@ -26,6 +26,10 @@ public class Category implements Serializable {
 		return diffPhrases.get(next);
 	}
 	
+	public void setUsed(){
+		used = true;
+	}
+	
 	public boolean isUsed(){
 		return used;
 	}

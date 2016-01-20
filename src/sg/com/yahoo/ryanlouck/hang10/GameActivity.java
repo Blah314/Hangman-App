@@ -1,8 +1,10 @@
 package sg.com.yahoo.ryanlouck.hang10;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -55,7 +57,6 @@ public class GameActivity extends Activity {
 		categories = (ArrayList<Category>) gameDetails.getSerializable("categories");
 		currCat = categories.get(chosenCat);
 		p = new Phrase(gameDetails.getString("next"));
-		if(gameMode == 6) p.doFortune(); // fortune mode check
 		fgActive = false;
 		lsActive = false;
 		enduranceComments = getResources().getStringArray(R.array.enduranceComments);
@@ -116,6 +117,15 @@ public class GameActivity extends Activity {
 				(Button) findViewById(R.id.button21), (Button) findViewById(R.id.button22),
 				(Button) findViewById(R.id.button23), (Button) findViewById(R.id.button24),
 				(Button) findViewById(R.id.button25), (Button) findViewById(R.id.button26)};
+		
+		if(gameMode == 6){ // fortune mode check
+			p.doFortune();
+			letterButtons[0].setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
+			letterButtons[4].setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
+			letterButtons[8].setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
+			letterButtons[14].setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
+			letterButtons[20].setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
+		}
 		
 		letterChooser = new View.OnClickListener() {
 			
@@ -390,6 +400,10 @@ public class GameActivity extends Activity {
 		if(p.isSolved() || gameMode == 6 && p.isFortuneSolved()){ // fortune mode checking
 			round.setText("Round " + Integer.toString(roundNo) + " complete!");
 			
+			if(gameMode == 6){
+				display.setText(p.correctAnswer());
+			}
+			
 			for(Button b : letterButtons){
 				b.setOnClickListener(null);
 			}
@@ -451,6 +465,35 @@ public class GameActivity extends Activity {
 			
 			else{
 				display.setText(p.currentState() + "\nPress Next to continue.");
+				
+				try{
+					FileOutputStream fos = openFileOutput("savegame", Context.MODE_PRIVATE);
+					
+					/*
+					 * Game Save format
+					 * 0 - global information (gameMode, livesLeft, roundNo)
+					 * 1 - power-up information
+					 * 2 - category names
+					 * 3 - category states
+					 */
+					
+					fos.write((Integer.toString(gameMode) + "," + Integer.toString(lives) + "," + Integer.toString(roundNo + 1) + "\n").getBytes());
+					fos.write((Boolean.toString(fgUsed) + "," + Boolean.toString(leUsed) + "," + Boolean.toString(lrUsed) + "," + Boolean.toString(lsUsed) + "\n").getBytes());
+					for(int i = 0; i < categories.size(); i++){
+						fos.write(categories.get(i).getName().getBytes());
+						if(i != categories.size() - 1) fos.write(",".getBytes());
+					}
+					fos.write("\n".getBytes());
+					for(int i = 0; i < 10; i++){
+						fos.write((Boolean.toString(categories.get(i).isUsed())).getBytes());
+						if(i != 9) fos.write(",".getBytes());
+					}
+					fos.flush();
+					fos.close();
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
 				
 				nextRoundButton.setVisibility(View.VISIBLE);
 				nextRoundButton.setOnClickListener(new View.OnClickListener() {

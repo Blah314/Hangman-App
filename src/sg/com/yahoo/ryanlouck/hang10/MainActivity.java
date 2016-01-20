@@ -1,6 +1,13 @@
 package sg.com.yahoo.ryanlouck.hang10;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
@@ -31,6 +39,63 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				Intent playLaunch = new Intent(getApplicationContext(), GameSelectActivity.class);
 				startActivity(playLaunch);
+			}
+		});
+		
+		continueButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				boolean fileFound = true;
+				ArrayList<String[]> saveDetails = new ArrayList<String[]>();
+				
+				// try to find the savegame file
+				try{
+					FileInputStream fis = openFileInput("savegame");
+					InputStreamReader isr = new InputStreamReader(fis);
+					BufferedReader br = new BufferedReader(isr);
+					while(br.ready()){
+						saveDetails.add(br.readLine().split(","));
+					}
+					br.close();
+				}
+				
+				// file not found - raise a toast and set fileFound to false
+				catch(FileNotFoundException fnfe){
+					Context c = getApplicationContext();
+					CharSequence text = getResources().getString(R.string.noSaveGame);
+					int duration = Toast.LENGTH_SHORT;
+						
+					Toast t = Toast.makeText(c, text, duration);
+					t.show();
+					fileFound = false;
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+				
+				if(fileFound){
+					Intent continueLaunch = new Intent(getApplicationContext(), CategoryActivity.class);
+					continueLaunch.putExtra("resumed", true);
+					
+					String[] globalDetails = saveDetails.get(0);
+					continueLaunch.putExtra("mode", Integer.parseInt(globalDetails[0]));
+					continueLaunch.putExtra("round", Integer.parseInt(globalDetails[2]));
+					continueLaunch.putExtra("livesLeft", Integer.parseInt(globalDetails[1]));
+					
+					String[] powerupDetails = saveDetails.get(1);
+					continueLaunch.putExtra("fg", Boolean.parseBoolean(powerupDetails[0]));
+					continueLaunch.putExtra("le", Boolean.parseBoolean(powerupDetails[1]));
+					continueLaunch.putExtra("lr", Boolean.parseBoolean(powerupDetails[2]));
+					continueLaunch.putExtra("ls", Boolean.parseBoolean(powerupDetails[3]));
+					
+					String[] categories = saveDetails.get(2);
+					String[] categoryStatus = saveDetails.get(3);
+					continueLaunch.putExtra("resCats", categories);
+					continueLaunch.putExtra("resCatStatus", categoryStatus);
+					
+					startActivity(continueLaunch);
+				}			
 			}
 		});
 		

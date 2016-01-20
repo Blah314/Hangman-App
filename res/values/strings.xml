@@ -109,7 +109,8 @@
         <item>Much respect to you.</item>
         <item>You\'re either too good or cheating. I suspect the latter.</item>
     </string-array>
-
+	
+    <string name="noSaveGame">There is currently no saved game.</string>
     <string name="modeLocked">You need to unlock this mode first.</string>
     <string name="title_activity_category">CategoryActivity</string>
     <string name="categoryChoice">Choose a Category...</string>
