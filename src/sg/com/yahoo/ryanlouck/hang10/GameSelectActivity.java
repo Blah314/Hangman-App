@@ -55,9 +55,9 @@ public class GameSelectActivity extends Activity {
 				gameData.getBoolean("escalation", false), gameData.getBoolean("fortune", false), gameData.getBoolean("quadLife", false), false};
 		
 		modesUnlocked = new boolean[]{true, gameModesCompleted[0], gameModesCompleted[1],
-				gameModesCompleted[0], gameModesCompleted[3], gameModesCompleted[1] && gameModesCompleted[3],
-				gameModesCompleted[4] && gameModesCompleted[5], gameModesCompleted[2] && gameModesCompleted[5],
-				gameModesCompleted[6] && gameModesCompleted[7]};
+				gameModesCompleted[0], gameModesCompleted[3], gameModesCompleted[1] || gameModesCompleted[3],
+				gameModesCompleted[4] || gameModesCompleted[5], gameModesCompleted[2] || gameModesCompleted[5],
+				gameModesCompleted[6] || gameModesCompleted[7]};
 		
 		gameStart = new View.OnClickListener() {
 			

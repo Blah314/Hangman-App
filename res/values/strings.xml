@@ -84,16 +84,16 @@
         <item>Complete Classic Medium to unlock.</item>
         <item>Complete Classic Easy to unlock.</item>
         <item>Complete Free Lunch to unlock.</item>
-        <item>Complete Free Lunch and Classic Medium to unlock.</item>
-        <item>Complete No Frills and Escalation to unlock.</item>
-        <item>Complete Escalation and Classic Hard to unlock.</item>
-        <item>Complete Fortune and Quad-Life to unlock.</item>
+        <item>Complete Free Lunch or Classic Medium to unlock.</item>
+        <item>Complete No Frills or Escalation to unlock.</item>
+        <item>Complete Escalation or Classic Hard to unlock.</item>
+        <item>Complete Fortune or Quad-Life to unlock.</item>
     </string-array>
     <string-array name="beatComments">
         <item>That was almost too easy - right?</item>
         <item>Hopefully that wasn\'t too hard.</item>
         <item>Nice work! But there are harder modes to come...</item>
-        <item>Meh. Arguably Free Lunch is the easiest game mode.</item>
+        <item>Big deal. Arguably Free Lunch is the easiest game mode.</item>
         <item>Who needs power-ups?</item>
         <item>How stressful were those last few rounds?</item>
         <item>Too bad to don\'t win real money...</item>
@@ -102,7 +102,7 @@
     </string-array>
     <string-array name="enduranceComments">
         <item>Weak... How did you even unlock this mode?</item>
-        <item>Meh. You\'re better than this.</item>
+        <item>You\'re better than this.</item>
         <item>You did okay... I guess.</item>
         <item>Not bad... Not bad at all...</item>
         <item>Impressive... Can you do even better though?</item>
