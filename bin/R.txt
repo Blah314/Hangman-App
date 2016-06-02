@@ -644,9 +644,9 @@ int string abc_shareactionprovider_share_with 0x7f0a0010
 int string abc_shareactionprovider_share_with_application 0x7f0a000f
 int string abc_toolbar_collapse_description 0x7f0a0004
 int string action_settings 0x7f0a0013
-int string alreadyActive 0x7f0a003d
-int string alreadyBeaten 0x7f0a003b
-int string alreadyUsed 0x7f0a003c
+int string alreadyActive 0x7f0a003e
+int string alreadyBeaten 0x7f0a003c
+int string alreadyUsed 0x7f0a003d
 int string app_name 0x7f0a0011
 int string backButton 0x7f0a001d
 int string cEasy 0x7f0a0028
@@ -661,8 +661,8 @@ int string fgDesc 0x7f0a0023
 int string firstPage 0x7f0a0021
 int string fortune 0x7f0a002e
 int string freeLunch 0x7f0a002b
-int string gameOver 0x7f0a0038
-int string gameWon 0x7f0a003a
+int string gameOver 0x7f0a0039
+int string gameWon 0x7f0a003b
 int string hello_world 0x7f0a0012
 int string helpButton 0x7f0a0017
 int string helpTitle 0x7f0a001c
@@ -674,7 +674,7 @@ int string lsDesc 0x7f0a0026
 int string modeLocked 0x7f0a0032
 int string modeSelect 0x7f0a0027
 int string nextButton 0x7f0a001f
-int string nextRound 0x7f0a0039
+int string nextRound 0x7f0a003a
 int string noFrills 0x7f0a002c
 int string noSaveGame 0x7f0a0031
 int string optionsButton 0x7f0a0018
@@ -688,6 +688,7 @@ int string title_activity_game_select 0x7f0a0019
 int string title_activity_help 0x7f0a001a
 int string title_activity_main 0x7f0a0014
 int string title_activity_options 0x7f0a001b
+int string vowelForbidden 0x7f0a0038
 int style AlertDialog_AppCompat 0x7f0b0040
 int style AlertDialog_AppCompat_Light 0x7f0b0041
 int style Animation_AppCompat_Dialog 0x7f0b0046

@@ -32,12 +32,21 @@ public class GameSelectActivity extends Activity {
 	    getActionBar().hide();
 		setContentView(R.layout.activity_game_select);
 		
+		loadGlobalAssets();
+		setUI();
+		loadProgress();
+		prepareGameStart();
+	}
+	
+	private void loadGlobalAssets(){
 		gameModes = getResources().getStringArray(R.array.modeNames);
 		modeDescs = getResources().getStringArray(R.array.modeDesc);
 		unlockReqs = getResources().getStringArray(R.array.unlockReqs);
 		
 		font = Typeface.createFromAsset(getAssets(), "caballar.ttf");
-		
+	}
+	
+	private void setUI(){
 		header = (TextView) findViewById(R.id.title);
 		header.setTypeface(font);
 		
@@ -46,8 +55,18 @@ public class GameSelectActivity extends Activity {
 				(Button) findViewById(R.id.escalation), (Button) findViewById(R.id.fortune), (Button) findViewById(R.id.quadLife),
 				(Button) findViewById(R.id.endurance)};
 		
-		fm = getFragmentManager();
+		backButton = (ImageButton) findViewById(R.id.backButton);
 		
+		backButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
+	}
+	
+	private void loadProgress(){
 		gameData = getSharedPreferences("modesCompleted", 0);
 		
 		gameModesCompleted = new boolean[]{gameData.getBoolean("cEasy", false), gameData.getBoolean("cMedium", false),
@@ -58,6 +77,10 @@ public class GameSelectActivity extends Activity {
 				gameModesCompleted[0], gameModesCompleted[3], gameModesCompleted[1] || gameModesCompleted[3],
 				gameModesCompleted[4] || gameModesCompleted[5], gameModesCompleted[2] || gameModesCompleted[5],
 				gameModesCompleted[6] || gameModesCompleted[7]};
+	}
+	
+	private void prepareGameStart(){
+		fm = getFragmentManager();
 		
 		gameStart = new View.OnClickListener() {
 			
@@ -83,16 +106,6 @@ public class GameSelectActivity extends Activity {
 				modeButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
 			}
 		}
-		
-		backButton = (ImageButton) findViewById(R.id.backButton);
-		
-		backButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
 	}
 	
 	public void onStop(){

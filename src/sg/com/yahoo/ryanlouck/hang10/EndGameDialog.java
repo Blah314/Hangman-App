@@ -29,8 +29,7 @@ public class EndGameDialog extends DialogFragment {
         
         if(hasBeat){
         	body.setText("You completed " + gameMode + " mode.\n\n" + R.string.alreadyBeaten);
-        }
-        else{
+        } else{
         	body.setText("You completed " + gameMode + " mode.\n\n" + beatComment);
         }
         

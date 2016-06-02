@@ -41,6 +41,29 @@ public class CategoryActivity extends Activity {
 	    getActionBar().hide();
 		setContentView(R.layout.activity_category);
 		
+		loadGameDetails();
+		setUI();
+		
+		if(lives == -1 || gameMode == 8){ // generate new categories for a new game or new endurance round
+			if(gameMode != 8){
+				lives = MODELIVES[gameMode];
+			}
+			
+			loadNewCategories();
+		}
+		
+		else if(resumed){ // loaded game
+			loadExistingCategories();
+		}
+		
+		else{ // data from previous rounds
+			showCurrentCategories();
+		}
+		
+		prepareNextRound();
+	}
+
+	private void loadGameDetails(){
 		Bundle gameDetails = getIntent().getExtras();
 		gameMode = gameDetails.getInt("mode", 0);
 		roundNo = gameDetails.getInt("round", 1);
@@ -53,7 +76,9 @@ public class CategoryActivity extends Activity {
 		resumedCategories = gameDetails.getStringArray("resCats");
 		resumedCategoryStatus = gameDetails.getStringArray("resCatStatus");
 		categories = (ArrayList<Category>) gameDetails.getSerializable("categories");
-		
+	}
+	
+	private void setUI(){
 		font = Typeface.createFromAsset(getAssets(), "caballar.ttf");
 		
 		header = (TextView) findViewById(R.id.textView1);
@@ -65,165 +90,169 @@ public class CategoryActivity extends Activity {
 				(Button) findViewById(R.id.button7), (Button) findViewById(R.id.button8),
 				(Button) findViewById(R.id.button9), (Button) findViewById(R.id.button10)};
 		
-		if(lives == -1 || gameMode == 8){
-			if(gameMode != 8) lives = MODELIVES[gameMode];
+		backButton = (ImageButton) findViewById(R.id.backButton);
+		
+		backButton.setOnClickListener(new View.OnClickListener() {
 			
-			try{
-				InputStream fis = getApplicationContext().getAssets().open("hangman_phrases.txt");
-				InputStreamReader isr = new InputStreamReader(fis);
-				BufferedReader br = new BufferedReader(isr);
-				
-				categories = new ArrayList<Category>();
-				
-				String currCat;
-				int currDiff = 0;
-				ArrayList<String> currPhrases = new ArrayList<String>();
-				Hashtable<Integer, ArrayList<String>> currCategory = new Hashtable<Integer, ArrayList<String>>();
-				
-				String line = br.readLine();
-				currCat = line.substring(5);
-				
-				line = br.readLine();
-				line = br.readLine();			
-				
-				while(line != null){
-					if(line.startsWith("CAT: ")){
-						currCategory.put(currDiff, currPhrases);
-						currPhrases = new ArrayList<String>();
-						Category newCat = new Category(currCat, currCategory);
-						categories.add(newCat);
-						currCat = line.substring(5);
-						currDiff = 0;
-						currCategory = new Hashtable<Integer, ArrayList<String>>();
-						line = br.readLine();
-					}
-					else if(line.startsWith("DIFF: ")){
-						currCategory.put(currDiff, currPhrases);
-						currDiff += 1;
-						currPhrases = new ArrayList<String>();
-					}
-					else{
-						currPhrases.add(line);
-					}
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
+	}
+	
+	private void loadNewCategories(){
+		try{
+			InputStream fis = getApplicationContext().getAssets().open("hangman_phrases.txt");
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader br = new BufferedReader(isr);
+			
+			categories = new ArrayList<Category>();
+			
+			String currCat;
+			int currDiff = 0;
+			ArrayList<String> currPhrases = new ArrayList<String>();
+			Hashtable<Integer, ArrayList<String>> currCategory = new Hashtable<Integer, ArrayList<String>>();
+			
+			String line = br.readLine();
+			currCat = line.substring(5);
+			
+			line = br.readLine();
+			line = br.readLine();			
+			
+			while(line != null){
+				if(line.startsWith("CAT: ")){
+					currCategory.put(currDiff, currPhrases);
+					currPhrases = new ArrayList<String>();
+					Category newCat = new Category(currCat, currCategory);
+					categories.add(newCat);
+					currCat = line.substring(5);
+					currDiff = 0;
+					currCategory = new Hashtable<Integer, ArrayList<String>>();
 					line = br.readLine();
+					
+				} else if(line.startsWith("DIFF: ")){
+					currCategory.put(currDiff, currPhrases);
+					currDiff += 1;
+					currPhrases = new ArrayList<String>();
+					
+				} else{
+					currPhrases.add(line);
 				}
 				
-				currCategory.put(currDiff, currPhrases);
-				Category newCat = new Category(currCat, currCategory);
-				categories.add(newCat);
-			}
-			catch(Exception e){
-				e.printStackTrace();
+				line = br.readLine();
 			}
 			
-			Random r = new Random();
-			while(categories.size() > 10){
-				int i = r.nextInt(categories.size());
-				categories.remove(i);
-			}
+			currCategory.put(currDiff, currPhrases);
+			Category newCat = new Category(currCat, currCategory);
+			categories.add(newCat);
 			
-			for(int i = 0; i < 10; i++){
-				categoryButtons[i].setText(categories.get(i).getName());
-				categoryButtons[i].setTypeface(font);
-				categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.catbox));
-			}						
+		} catch(Exception e){
+			e.printStackTrace();
 		}
 		
-		else if(resumed){
-			try{
-				InputStream fis = getApplicationContext().getAssets().open("hangman_phrases.txt");
-				InputStreamReader isr = new InputStreamReader(fis);
-				BufferedReader br = new BufferedReader(isr);
-				
-				categories = new ArrayList<Category>();
-				
-				String currCat;
-				int currDiff = 0;
-				ArrayList<String> currPhrases = new ArrayList<String>();
-				Hashtable<Integer, ArrayList<String>> currCategory = new Hashtable<Integer, ArrayList<String>>();
-				
-				String line = br.readLine();
-				currCat = line.substring(5);
-				
-				line = br.readLine();
-				line = br.readLine();			
-				
-				while(line != null){
-					if(line.startsWith("CAT: ")){
-						currCategory.put(currDiff, currPhrases);
-						currPhrases = new ArrayList<String>();
-						Category newCat = new Category(currCat, currCategory);
-						System.out.println(newCat.getName());
-						for(int i = 0; i < 10; i++){
-							System.out.println(resumedCategories[i]);
-							if(newCat.getName().equals(resumedCategories[i])){
-								if(Boolean.parseBoolean(resumedCategoryStatus[i])){
-									newCat.setUsed();
-								}
-								categories.add(newCat);
-								System.out.println("Category Added.");
-								break;
+		Random r = new Random();
+		while(categories.size() > 10){
+			int i = r.nextInt(categories.size());
+			categories.remove(i);
+		}
+		
+		for(int i = 0; i < 10; i++){
+			categoryButtons[i].setText(categories.get(i).getName());
+			categoryButtons[i].setTypeface(font);
+			categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.catbox));
+		}
+	}
+	
+	private void loadExistingCategories(){
+		try{
+			InputStream fis = getApplicationContext().getAssets().open("hangman_phrases.txt");
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader br = new BufferedReader(isr);
+			
+			categories = new ArrayList<Category>();
+			
+			String currCat;
+			int currDiff = 0;
+			ArrayList<String> currPhrases = new ArrayList<String>();
+			Hashtable<Integer, ArrayList<String>> currCategory = new Hashtable<Integer, ArrayList<String>>();
+			
+			String line = br.readLine();
+			currCat = line.substring(5);
+			
+			line = br.readLine();
+			line = br.readLine();			
+			
+			while(line != null){
+				if(line.startsWith("CAT: ")){
+					currCategory.put(currDiff, currPhrases);
+					currPhrases = new ArrayList<String>();
+					Category newCat = new Category(currCat, currCategory);
+					for(int i = 0; i < 10; i++){
+						if(newCat.getName().equals(resumedCategories[i])){
+							if(Boolean.parseBoolean(resumedCategoryStatus[i])){
+								newCat.setUsed();
 							}
+							categories.add(newCat);
+							break;
 						}
-						currCat = line.substring(5);
-						currDiff = 0;
-						currCategory = new Hashtable<Integer, ArrayList<String>>();
-						line = br.readLine();
 					}
-					else if(line.startsWith("DIFF: ")){
-						currCategory.put(currDiff, currPhrases);
-						currDiff += 1;
-						currPhrases = new ArrayList<String>();
-					}
-					else{
-						currPhrases.add(line);
-					}
+					currCat = line.substring(5);
+					currDiff = 0;
+					currCategory = new Hashtable<Integer, ArrayList<String>>();
 					line = br.readLine();
+					
+				} else if(line.startsWith("DIFF: ")){
+					currCategory.put(currDiff, currPhrases);
+					currDiff += 1;
+					currPhrases = new ArrayList<String>();
+					
+				} else{
+					currPhrases.add(line);
 				}
 				
-				currCategory.put(currDiff, currPhrases);
-				Category newCat = new Category(currCat, currCategory);
-				System.out.println(newCat.getName());
-				for(int i = 0; i < 10; i++){
-					System.out.println(resumedCategories[i]);
-					if(newCat.getName().equals(resumedCategories[i])){
-						if(Boolean.parseBoolean(resumedCategoryStatus[i])){
-							newCat.setUsed();
-						}
-						categories.add(newCat);
-						break;
-					}
-				}
-			}
-			catch(Exception e){
-				e.printStackTrace();
+				line = br.readLine();
 			}
 			
+			currCategory.put(currDiff, currPhrases);
+			Category newCat = new Category(currCat, currCategory);
 			for(int i = 0; i < 10; i++){
-				categoryButtons[i].setText(categories.get(i).getName());
-				categoryButtons[i].setTypeface(font);
-				if(categories.get(i).isUsed()){
-					categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.redcatbox));
-				}
-				else{
-					categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.catbox));
+				if(newCat.getName().equals(resumedCategories[i])){
+					if(Boolean.parseBoolean(resumedCategoryStatus[i])){
+						newCat.setUsed();
+					}
+					categories.add(newCat);
+					break;
 				}
 			}
+		} catch(Exception e){
+			e.printStackTrace();
 		}
 		
-		else{
-			for(int i = 0; i < 10; i++){
-				categoryButtons[i].setText(categories.get(i).getName());
-				categoryButtons[i].setTypeface(font);
-				if(categories.get(i).isUsed()){
-					categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.redcatbox));
-				}
-				else{
-					categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.catbox));
-				}
-			}	
+		for(int i = 0; i < 10; i++){
+			categoryButtons[i].setText(categories.get(i).getName());
+			categoryButtons[i].setTypeface(font);
+			if(categories.get(i).isUsed()){
+				categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.redcatbox));
+			} else{
+				categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.catbox));
+			}
 		}
-		
+	}
+	
+	private void showCurrentCategories(){
+		for(int i = 0; i < 10; i++){
+			categoryButtons[i].setText(categories.get(i).getName());
+			categoryButtons[i].setTypeface(font);
+			if(categories.get(i).isUsed()){
+				categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.redcatbox));
+			} else{
+				categoryButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.catbox));
+			}
+		}
+	}
+	
+	private void prepareNextRound(){
 		gameStart = new View.OnClickListener() {
 			
 			@Override
@@ -252,13 +281,8 @@ public class CategoryActivity extends Activity {
 				for(int i = 0; i < 10; i++){
 					if (categoryButtons[i] == v){
 						if(categories.get(i).isUsed()){
-							CharSequence text = getResources().getString(R.string.categoryChosen);
-							int duration = Toast.LENGTH_SHORT;
-							
-							Toast t = Toast.makeText(getApplicationContext(), text, duration);
-							t.show();
-						}
-						else{
+							showToast(getResources().getString(R.string.categoryChosen));							
+						} else{
 							Intent gameLaunch = new Intent(getApplicationContext(), GameActivity.class);
 							String chosen = categories.get(i).newPharse(diff);
 							gameLaunch.putExtra("mode", gameMode);
@@ -282,18 +306,15 @@ public class CategoryActivity extends Activity {
 		for(Button b : categoryButtons){
 			b.setOnClickListener(gameStart);
 		}
-		
-		backButton = (ImageButton) findViewById(R.id.backButton);
-		
-		backButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
 	}
-
+	
+	private void showToast(CharSequence text){
+		int duration = Toast.LENGTH_SHORT;
+		
+		Toast t = Toast.makeText(getApplicationContext(), text, duration);
+		t.show();
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

@@ -117,6 +117,7 @@
     <string name="categoryChosen">You have already chosen this category.</string>
     <string name="title_activity_game">GameActivity</string>
     <string name="letterChosen">You have already chosen this letter.</string>
+    <string name="vowelForbidden">You cannot guess vowels in Fortune mode.</string>
     <string name="gameOver">GAME OVER! The correct answer was:</string>
     <string name="nextRound">Next></string>
     <string name="gameWon">YOU WIN!</string>

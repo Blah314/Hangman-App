@@ -9,6 +9,7 @@ public class Phrase {
 	final char[] LETTERS = new char[]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
 			'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 	final char specialSpace = (char) 160;
+	
 	private char[] answer;
 	private StringBuffer state;
 	private boolean[] guessed, inside, outside;
