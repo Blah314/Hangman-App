@@ -46,9 +46,9 @@ public class GameActivity extends Activity {
 		
 		loadGlobalAssets();
 		loadRoundDetails();
-		setUI();
-		initialiseFields();
+		setUI();		
 		modeChecks();
+		initialiseFields();
 		setListeners();
 		prepareButtons();
 	}
@@ -390,6 +390,8 @@ public class GameActivity extends Activity {
 				display.setText(enduranceComments[6]);
 			}
 		}
+		
+		deleteFile("savegame");
 	}
 	
 	private void roundComplete(){
@@ -416,6 +418,9 @@ public class GameActivity extends Activity {
 	}
 	
 	private void gameWon(){
+		
+		deleteFile("savegame");
+		
 		SharedPreferences gameData = getSharedPreferences("modesCompleted", 0);
 		SharedPreferences.Editor editor = gameData.edit();
 		boolean beatBefore;
