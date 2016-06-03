@@ -67,6 +67,19 @@ public class OptionsActivity extends Activity {
 			}
 		});
 		
+		highscoreResetButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				SharedPreferences hs = getSharedPreferences("highscore", 0);
+				SharedPreferences.Editor editor = hs.edit();
+				
+				editor.putInt("endurance", 0);
+				editor.commit();
+			}
+		});
+		
+		
 		backButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
