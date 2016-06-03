@@ -101,9 +101,12 @@ public class GameSelectActivity extends Activity {
 			modeButtons[i].setTypeface(font);
 			if(gameModesCompleted[i]){
 				modeButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.greenbox));
-			}
-			else if(!modesUnlocked[i]){
+			} else if(!modesUnlocked[i]){
 				modeButtons[i].setBackgroundDrawable(getResources().getDrawable(R.drawable.redbox));
+			} else if(i == 8){ // endurance button
+				SharedPreferences hs = getSharedPreferences("highscore", 0);				
+				modeButtons[i].setText(getResources().getString(R.string.endurance) + 
+						"\nBest: " + Integer.toString(hs.getInt("endurance", 0)));
 			}
 		}
 	}

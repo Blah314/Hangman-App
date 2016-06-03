@@ -389,6 +389,13 @@ public class GameActivity extends Activity {
 			} else{
 				display.setText(enduranceComments[6]);
 			}
+			
+			SharedPreferences hs = getSharedPreferences("highscore", 0);
+			SharedPreferences.Editor editor = hs.edit();
+			
+			editor.putInt("endurance", roundNo);
+			editor.commit();
+			
 		}
 		
 		deleteFile("savegame");

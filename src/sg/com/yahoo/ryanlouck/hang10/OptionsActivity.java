@@ -2,16 +2,23 @@ package sg.com.yahoo.ryanlouck.hang10;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class OptionsActivity extends Activity {
 	
-	private Button backButton;
+	private Typeface font;
+	private TextView optionsTitle;
+	private Button hardResetButton, highscoreResetButton;
+	private ImageButton backButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +27,45 @@ public class OptionsActivity extends Activity {
 	    getActionBar().hide();
 		setContentView(R.layout.activity_options);
 		
-		backButton = (Button) findViewById(R.id.backButton);
+		loadAssets();
+		setButtons();
+	}
+	
+	private void loadAssets(){	
+		font = Typeface.createFromAsset(getAssets(), "caballar.ttf");
+		
+		optionsTitle = (TextView) findViewById(R.id.titleOptions);
+		hardResetButton = (Button) findViewById(R.id.hardResetButton);
+		highscoreResetButton = (Button) findViewById(R.id.highscoreResetButton);
+		backButton = (ImageButton) findViewById(R.id.backButton);
+		
+		optionsTitle.setTypeface(font);
+		hardResetButton.setTypeface(font);
+		highscoreResetButton.setTypeface(font);
+		
+	}
+	
+	private void setButtons(){
+		
+		hardResetButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				SharedPreferences gameData = getSharedPreferences("modesCompleted", 0);
+				SharedPreferences.Editor editor = gameData.edit();
+				
+				editor.putBoolean("cEasy", false);
+				editor.putBoolean("cMedium", false);
+				editor.putBoolean("cHard", false);
+				editor.putBoolean("freeLunch", false);
+				editor.putBoolean("noFrills", false);
+				editor.putBoolean("escalation", false);
+				editor.putBoolean("fortune", false);
+				editor.putBoolean("quadLife", false);
+				
+				editor.commit();
+			}
+		});
 		
 		backButton.setOnClickListener(new View.OnClickListener() {
 			

@@ -6,14 +6,52 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
     tools:context="sg.com.yahoo.ryanlouck.hang10.OptionsActivity" >
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/backButton" />
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/backButton"
+	    android:orientation="vertical" >
+
+		<Button
+		    android:id="@+id/hardResetButton"
+		    style="?android:attr/buttonStyleSmall"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:background="@drawable/catbox"
+		    android:text="@string/hardReset" />
+		
+		<Button
+		    android:id="@+id/highscoreResetButton"
+		    style="?android:attr/buttonStyleSmall"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:background="@drawable/catbox"
+		    android:text="@string/resetEndurance" />
+
+	</LinearLayout>
+
+	<TextView
+	    android:id="@+id/titleOptions"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="true"
+	    android:layout_centerHorizontal="true"
+	    android:text="@string/optionsButton"
+	    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	<ImageButton
+	    android:id="@+id/backButton"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentTop="true"
+	    android:adjustViewBounds="true"
+	    android:background="@drawable/blankbox"
+	    android:src="@drawable/backbutton" />
 
 </RelativeLayout>

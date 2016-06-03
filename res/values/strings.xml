@@ -8,7 +8,7 @@
     <string name="playButton">Play!</string>
     <string name="continueButton">Continue\nGame</string>
     <string name="helpButton">Help</string>
-    <string name="optionsButton">Options</string>
+    <string name="optionsButton">OPTIONS</string>
     <string name="title_activity_game_select">GameSelectActivity</string>
     <string name="title_activity_help">HelpActivity</string>
     <string name="title_activity_options">OptionsActivity</string>
@@ -19,6 +19,8 @@
     <string name="placeholder">PH</string>
     <string name="firstPage">This is the first page.</string>
     <string name="lastPage">This is the last page.</string>
+    <string name="hardReset">RESET PROGRESS\nThis will mark all game modes as incomplete.</string>
+    <string name="resetEndurance">CLEAR HIGHSCORE\nThis will reset your highscore in Endurance mode.</string>
 
     <string-array name="instructions">
         <item>Welcome to Hang 10!\n\n
