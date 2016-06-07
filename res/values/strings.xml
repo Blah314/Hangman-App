@@ -36,6 +36,7 @@
 		    Can you conquer them all?</item>
     </string-array>
     
+    <string name="powerupHeader">Depending on the game mode, you will have up to four powerups at your disposal.</string>
     <string name="fgDesc">The Free Guess: If you guess wrongly in your next turn, you won\'t lose a life!</string>
     <string name="leDesc">The Letter Eliminator: Eliminates five random letters not in the phrase from those that have not been guessed.</string>
     <string name="lrDesc">The Letter Reveal: Reveals a random letter in the phrase.</string>

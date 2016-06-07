@@ -17,10 +17,13 @@ public class HelpActivity extends Activity {
 	
 	private Typeface font;
 	private ImageButton backButton;
-	private TextView header, page0, page1, page2, fgDesc, lsDesc, leDesc, lrDesc;
+	private TextView header;
 	private RelativeLayout powerupTable;
+	private TextView[] helpPages;
+	private TextView[] powerUpDescs;
 	private String[] helpHeaders, help;
-	private Button help1, help2, help3;
+	private Button[] helpButtons;
+	private View.OnClickListener helpButtonListener;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,85 +32,40 @@ public class HelpActivity extends Activity {
 	    getActionBar().hide();
 		setContentView(R.layout.activity_help);
 		
+		loadGlobalAssets();
+		setUI();
+		setListeners();
+		configureUI();
+		setInitialPage();	
+	}
+	
+	private void loadGlobalAssets(){
 		help = getResources().getStringArray(R.array.instructions);
-		helpHeaders = getResources().getStringArray(R.array.instructionPages);
-		
+		helpHeaders = getResources().getStringArray(R.array.instructionPages);		
+		font = Typeface.createFromAsset(getAssets(), "caballar.ttf");
+	}
+	
+	private void setUI(){
+		header = (TextView) findViewById(R.id.helpTitle);
+		powerupTable = (RelativeLayout) findViewById(R.id.powerupTable);
 		backButton = (ImageButton) findViewById(R.id.backButton);
 		
-		font = Typeface.createFromAsset(getAssets(), "caballar.ttf");
+		helpPages = new TextView[]{(TextView) findViewById(R.id.page0), 
+				(TextView) findViewById(R.id.page1),
+				(TextView) findViewById(R.id.page2)};
 		
-		header = (TextView) findViewById(R.id.helpTitle);
-		page0 = (TextView) findViewById(R.id.page0);
-		page1 = (TextView) findViewById(R.id.page1);
-		page2 = (TextView) findViewById(R.id.page2);
-		fgDesc = (TextView) findViewById(R.id.fgDesc);
-		lsDesc = (TextView) findViewById(R.id.lsDesc);
-		lrDesc = (TextView) findViewById(R.id.lrDesc);
-		leDesc = (TextView) findViewById(R.id.leDesc);
+		powerUpDescs = new TextView[]{(TextView) findViewById(R.id.powerupHeader),
+				(TextView) findViewById(R.id.fgDesc),
+				(TextView) findViewById(R.id.lsDesc),
+				(TextView) findViewById(R.id.lrDesc),
+				(TextView) findViewById(R.id.leDesc)};
 		
-		help1 = (Button) findViewById(R.id.button1);
-		help2 = (Button) findViewById(R.id.button2);
-		help3 = (Button) findViewById(R.id.button3);
-		
-		header.setTypeface(font);
-		page0.setTypeface(font);
-		page1.setTypeface(font);
-		page2.setTypeface(font);
-		fgDesc.setTypeface(font);
-		lsDesc.setTypeface(font);
-		lrDesc.setTypeface(font);
-		leDesc.setTypeface(font);
-		
-		page0.setText(help[0]);
-		page1.setText(help[1]);
-		page2.setText(help[2]);
-		
-		powerupTable = (RelativeLayout) findViewById(R.id.powerupTable);
-		
-		help1.setTypeface(font);
-		help2.setTypeface(font);
-		help3.setTypeface(font);
-		
-		help1.setText(helpHeaders[0]);
-		help2.setText(helpHeaders[1]);
-		help3.setText(helpHeaders[2]);
-		
-		help1.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				page0.setVisibility(View.INVISIBLE);
-				page2.setVisibility(View.INVISIBLE);
-				powerupTable.setVisibility(View.INVISIBLE);
-				page1.setVisibility(View.VISIBLE);
-			}
-		});
-		
-		help2.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				page0.setVisibility(View.INVISIBLE);
-				page1.setVisibility(View.INVISIBLE);
-				powerupTable.setVisibility(View.INVISIBLE);
-				page2.setVisibility(View.VISIBLE);
-			}
-		});
-		
-		help3.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				page0.setVisibility(View.INVISIBLE);
-				page1.setVisibility(View.INVISIBLE);
-				page2.setVisibility(View.INVISIBLE);
-				powerupTable.setVisibility(View.VISIBLE);
-			}
-		});
-		
-		page1.setVisibility(View.INVISIBLE);
-		page2.setVisibility(View.INVISIBLE);
-		powerupTable.setVisibility(View.INVISIBLE);
+		helpButtons = new Button[]{(Button) findViewById(R.id.button1),
+				(Button) findViewById(R.id.button2),
+				(Button) findViewById(R.id.button3)};
+	}
+	
+	private void setListeners(){
 		
 		backButton.setOnClickListener(new OnClickListener(){
 			
@@ -116,10 +74,60 @@ public class HelpActivity extends Activity {
 				finish();
 			}
 		});
+		
+		helpButtonListener = new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(v == helpButtons[helpButtons.length - 1]){ // last button - powerup screen
+					for(TextView page : helpPages){
+						page.setVisibility(View.INVISIBLE);
+					}
+					powerupTable.setVisibility(View.VISIBLE);
+					
+				} else{
+					powerupTable.setVisibility(View.INVISIBLE);
+					helpPages[0].setVisibility(View.INVISIBLE);
+					
+					for(int i = 0; i < helpButtons.length - 1; i++){
+						if(v == helpButtons[i]){
+							helpPages[i + 1].setVisibility(View.VISIBLE);
+						} else{
+							helpPages[i + 1].setVisibility(View.INVISIBLE);
+						}
+					}
+				}
+			}
+		};
 	}
 	
-	public void updateFields(int page){
+	private void configureUI(){
+		header.setTypeface(font);
 		
+		for(int i = 0; i < help.length; i++){
+			helpPages[i].setVisibility(View.INVISIBLE);
+			helpPages[i].setTypeface(font);
+			helpPages[i].setText(help[i]);
+		}
+		
+		for(int i = 0; i < helpHeaders.length; i++){
+			helpButtons[i].setTypeface(font);
+			helpButtons[i].setText(helpHeaders[i]);
+		}
+		
+		for(TextView v : powerUpDescs){
+			v.setTypeface(font);
+		}
+		
+		for(Button b : helpButtons){
+			b.setTypeface(font);
+			b.setOnClickListener(helpButtonListener);
+		}
+	}
+	
+	private void setInitialPage(){
+		powerupTable.setVisibility(View.INVISIBLE);
+		helpPages[0].setVisibility(View.VISIBLE);
 	}
 	
 	public void onStop(){
