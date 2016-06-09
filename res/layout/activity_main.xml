@@ -24,6 +24,7 @@
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_centerHorizontal="true"
+       android:layout_above="@+id/versionText"
        android:layout_below="@+id/title" >
 
        <ImageButton
@@ -82,5 +83,14 @@
            android:paddingTop="5dp"
            android:src="@drawable/optionsbutton" />
    </LinearLayout>
+
+   <TextView
+       android:id="@+id/versionText"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+       android:layout_alignParentRight="true"
+       android:text="@string/version"
+       android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

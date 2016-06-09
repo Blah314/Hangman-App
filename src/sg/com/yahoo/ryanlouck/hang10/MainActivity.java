@@ -9,16 +9,20 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
+	private TextView version;
+	private Typeface font;
 	private ImageButton playButton, continueButton, helpButton, optionsButton;
 	private boolean fileFound;
 	
@@ -28,6 +32,10 @@ public class MainActivity extends Activity {
 		getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 	    getActionBar().hide();
 		setContentView(R.layout.activity_main);
+		
+		version = (TextView) findViewById(R.id.versionText);
+		font = Typeface.createFromAsset(getAssets(), "caballar.ttf");
+		version.setTypeface(font);
 		
 		loadButtons();
 	}

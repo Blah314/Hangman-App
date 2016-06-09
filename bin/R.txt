@@ -443,7 +443,7 @@ int id action_menu_presenter 0x7f090006
 int id action_mode_bar 0x7f09003d
 int id action_mode_bar_stub 0x7f09003c
 int id action_mode_close_button 0x7f090025
-int id action_settings 0x7f09009b
+int id action_settings 0x7f09009c
 int id activity_chooser_view_content 0x7f090026
 int id alertTitle 0x7f090030
 int id always 0x7f090019
@@ -484,7 +484,7 @@ int id categoryName 0x7f090062
 int id checkbox 0x7f090038
 int id collapseActionView 0x7f09001a
 int id contentPanel 0x7f090031
-int id continueButton 0x7f090095
+int id continueButton 0x7f090096
 int id custom 0x7f090035
 int id customPanel 0x7f090034
 int id decor_content_parent 0x7f09003e
@@ -502,10 +502,10 @@ int id fgDesc 0x7f09008c
 int id fortune 0x7f090083
 int id freeGuess 0x7f090077
 int id freeLunch 0x7f09007f
-int id hardResetButton 0x7f090098
-int id helpButton 0x7f090096
+int id hardResetButton 0x7f090099
+int id helpButton 0x7f090097
 int id helpTitle 0x7f090085
-int id highscoreResetButton 0x7f090099
+int id highscoreResetButton 0x7f09009a
 int id home 0x7f090000
 int id homeAsUp 0x7f09000e
 int id icon 0x7f09002b
@@ -531,13 +531,13 @@ int id nextRoundButton 0x7f09007b
 int id noFrills 0x7f090082
 int id none 0x7f09000f
 int id normal 0x7f09000b
-int id optionsButton 0x7f090097
+int id optionsButton 0x7f090098
 int id page0 0x7f090086
 int id page1 0x7f090087
 int id page2 0x7f090088
 int id parentPanel 0x7f09002d
 int id phrase 0x7f090063
-int id playButton 0x7f090094
+int id playButton 0x7f090095
 int id powerUpButtons 0x7f090065
 int id powerupHeader 0x7f09008a
 int id powerupTable 0x7f090089
@@ -579,11 +579,12 @@ int id tableRow5 0x7f09005e
 int id textSpacerNoButtons 0x7f090033
 int id textView1 0x7f09004f
 int id title 0x7f09002c
-int id titleOptions 0x7f09009a
+int id titleOptions 0x7f09009b
 int id title_template 0x7f09002f
 int id topPanel 0x7f09002e
 int id up 0x7f090001
 int id useLogo 0x7f090013
+int id versionText 0x7f090094
 int id withText 0x7f09001d
 int id wrap_content 0x7f090009
 int integer abc_config_activityDefaultDur 0x7f080001
@@ -668,7 +669,6 @@ int string freeLunch 0x7f0a002e
 int string gameOver 0x7f0a003c
 int string gameWon 0x7f0a003e
 int string hardReset 0x7f0a0023
-int string hello_world 0x7f0a0012
 int string helpButton 0x7f0a0017
 int string helpTitle 0x7f0a001c
 int string lastPage 0x7f0a0022
@@ -695,6 +695,7 @@ int string title_activity_game_select 0x7f0a0019
 int string title_activity_help 0x7f0a001a
 int string title_activity_main 0x7f0a0014
 int string title_activity_options 0x7f0a001b
+int string version 0x7f0a0012
 int string vowelForbidden 0x7f0a003b
 int style AlertDialog_AppCompat 0x7f0b0040
 int style AlertDialog_AppCompat_Light 0x7f0b0041
