@@ -1,7 +1,6 @@
 package sg.com.yahoo.ryanlouck.hang10;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
